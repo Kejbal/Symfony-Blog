@@ -31,12 +31,15 @@ services:
         class: App\Admin\CategoryAdmin
         arguments: [~, App\Entity\Category, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Category }
+            - { name: sonata.admin, manager_type: orm, group: "Post", label: Category }
         public: true
 
     admin.blog_post:
         class: App\Admin\BlogPostAdmin
         arguments: [~, App\Entity\BlogPost, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Blog post }
+            - { name: sonata.admin, manager_type: orm, group: "Post", label: Blog post }
         public: true
+
+
+
