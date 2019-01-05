@@ -3,6 +3,8 @@
 namespace App\Tests\Admin;
 
 use App\Entity\Category;
+use App\Tests\Admin\BlogPostAdminTest;
+
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class CategoryAdminTest extends WebTestCase
@@ -43,7 +45,6 @@ class CategoryAdminTest extends WebTestCase
         self::bootKernel();
 
         $client = static::createClient();
-
         $crawler = $client->request('GET', 'admin/app/category/create');
 
         $send_button = $crawler->selectButton('Create');
@@ -66,13 +67,16 @@ class CategoryAdminTest extends WebTestCase
         $send_button = $crawler->selectButton('Update');
 
         $form = $send_button->form(array(
-            'sec4809de79[name]' => 'thiX4sei',
+            'sec4809de79[name]' => 'Hu4thahr',
         ));
 
         $crawler = $client->submit($form);
 
-        $category = self::$container->get('doctrine')->getRepository(Category::class)->findOneBy(array('name' => 'thiX4sei'));
+        $category = self::$container->get('doctrine')->getRepository(Category::class)->findOneBy(array('name' => 'Hu4thahr'));
         $this->assertTrue(!empty($category));
+
+        $blogPostTest=new BlogPostAdminTest();
+        $blogPostTest->AddEdit();
 
         $this->assertTrue($crawler->filter('html:contains("Redirecting to")')->count() > 0);
 
@@ -94,6 +98,9 @@ class CategoryAdminTest extends WebTestCase
         $crawler = $client->submit($form);
 
         $this->assertTrue($crawler->filter('html:contains("Redirecting to")')->count() > 0);
+
+        $category = self::$container->get('doctrine')->getRepository(Category::class)->findOneBy(array('name' => 'thiX4sei'));
+        $this->assertTrue(!$category);
 
     }
 
