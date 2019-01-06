@@ -14,6 +14,8 @@ class CategoryTest extends TestCase
 
         $category = new Category();
 
+        $category->getId();
+
         $category->setName('Name');
         $this->assertEquals("Name", $category->getName());
 
@@ -29,6 +31,8 @@ class CategoryTest extends TestCase
         $this->assertNotEmpty($category->getBlogPost());
         $category->removeBlogPost($post);
         $this->assertEmpty($category->getBlogPost());
+
+        $category->getId();
 
     }
 }

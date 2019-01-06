@@ -14,6 +14,8 @@ class BlogPostTest extends TestCase
 
         $post = new BlogPost();
 
+        $post->getId();
+
         $post->setTitle('Title');
         $this->assertEquals("Title", $post->getTitle());
 

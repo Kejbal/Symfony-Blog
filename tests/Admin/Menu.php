@@ -29,5 +29,15 @@ class Menu extends WebTestCase
             $crawler->filter('a:contains("Blog post")')->attr('href')
         );
 
+        $this->assertGreaterThan(
+            1,
+            $crawler->filter('a:contains("User")')->count()
+        );
+
+        $this->assertEquals(
+            '/admin/app/user/list',
+            $crawler->filter('a:contains("User")')->eq(1)->attr('href')
+        );
+
     }
 }

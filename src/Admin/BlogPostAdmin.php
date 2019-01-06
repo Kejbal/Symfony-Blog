@@ -34,6 +34,8 @@ class BlogPostAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper->add('title');
+        $datagridMapper->add('category.name');
+
     }
 
     protected function configureListFields(ListMapper $listMapper)
