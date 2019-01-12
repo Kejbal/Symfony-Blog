@@ -11,32 +11,32 @@ class Menu extends WebTestCase
     {
         $this->assertGreaterThan(
             0,
-            $crawler->filter('a:contains("Category")')->count()
+            $crawler->filter('.treeview-menu > li > a:contains("Category")')->count()
         );
 
         $this->assertEquals(
             '/admin/app/category/list',
-            $crawler->filter('a:contains("Category")')->attr('href')
+            $crawler->filter('.treeview-menu > li > a:contains("Category")')->attr('href')
         );
 
         $this->assertGreaterThan(
             0,
-            $crawler->filter('a:contains("Blog post")')->count()
+            $crawler->filter('.treeview-menu > li > a:contains("Blog post")')->count()
         );
 
         $this->assertEquals(
             '/admin/app/blogpost/list',
-            $crawler->filter('a:contains("Blog post")')->attr('href')
+            $crawler->filter('.treeview-menu > li > a:contains("Blog post")')->attr('href')
         );
 
         $this->assertGreaterThan(
-            1,
-            $crawler->filter('a:contains("User")')->count()
+            0,
+            $crawler->filter('.treeview-menu > li > a:contains("User")')->count()
         );
 
         $this->assertEquals(
             '/admin/app/user/list',
-            $crawler->filter('a:contains("User")')->eq(1)->attr('href')
+            $crawler->filter('.treeview-menu > li > a:contains("User")')->attr('href')
         );
 
     }

@@ -22,7 +22,7 @@ class UserAdminTest extends WebTestCase
 
             $this->assertGreaterThan(
                 0,
-                $crawler->filter('a:contains("Add new")')->count()
+                $crawler->filter('a.sonata-action-element:contains("Add new")')->count()
             );
 
         } else {
@@ -43,6 +43,21 @@ class UserAdminTest extends WebTestCase
             );
 
         }
+
+        $this->assertGreaterThan(
+            0,
+            $crawler->filter('a.sonata-toggle-filter:contains("Email")')->count()
+        );
+
+        $this->assertGreaterThan(
+            0,
+            $crawler->filter('a.sonata-toggle-filter:contains("Roles")')->count()
+        );
+
+        $this->assertGreaterThan(
+            0,
+            $crawler->filter('a.sonata-toggle-filter:contains("Status")')->count()
+        );
 
     }
 

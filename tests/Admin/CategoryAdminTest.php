@@ -4,7 +4,6 @@ namespace App\Tests\Admin;
 
 use App\Entity\Category;
 use App\Tests\Admin\BlogPostAdminTest;
-
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class CategoryAdminTest extends WebTestCase
@@ -25,17 +24,22 @@ class CategoryAdminTest extends WebTestCase
 
             $this->assertGreaterThan(
                 0,
-                $crawler->filter('a:contains("Add new")')->count()
+                $crawler->filter('a.sonata-action-element:contains("Add new")')->count()
             );
 
         } else {
 
             $this->assertGreaterThan(
                 0,
-                $crawler->filter('a:contains("Name")')->count()
+                $crawler->filter('th:contains("Name")')->count()
             );
 
         }
+
+        $this->assertGreaterThan(
+            0,
+            $crawler->filter('a.sonata-toggle-filter:contains("Name")')->count()
+        );
 
     }
 
@@ -75,7 +79,7 @@ class CategoryAdminTest extends WebTestCase
         $category = self::$container->get('doctrine')->getRepository(Category::class)->findOneBy(array('name' => 'Hu4thahr'));
         $this->assertTrue(!empty($category));
 
-        $blogPostTest=new BlogPostAdminTest();
+        $blogPostTest = new BlogPostAdminTest();
         $blogPostTest->AddEdit();
 
         $this->assertTrue($crawler->filter('html:contains("Redirecting to")')->count() > 0);

@@ -24,7 +24,7 @@ class BlogPostAdminTest extends WebTestCase
 
             $this->assertGreaterThan(
                 0,
-                $crawler->filter('a:contains("Add new")')->count()
+                $crawler->filter('a.sonata-action-element:contains("Add new")')->count()
             );
 
         } else {
@@ -40,6 +40,16 @@ class BlogPostAdminTest extends WebTestCase
             );
 
         }
+
+        $this->assertGreaterThan(
+            0,
+            $crawler->filter('a.sonata-toggle-filter:contains("Title")')->count()
+        );
+
+        $this->assertGreaterThan(
+            0,
+            $crawler->filter('a.sonata-toggle-filter:contains("Category Name")')->count()
+        );
 
     }
 
