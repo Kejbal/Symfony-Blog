@@ -33,7 +33,7 @@ class AllPageTest extends WebTestCase
             array('admin/app/blogpost/create'),
             array('admin/app/category/list'),
             array('admin/app/category/create'),
-            array('admin/app/login'),
+            //array('admin/app/login'),
         );
     }
 }
