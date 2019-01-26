@@ -4,21 +4,15 @@ namespace App\Tests\Admin;
 
 use App\Entity\Category;
 use App\Tests\Admin\BlogPostAdminTest;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class CategoryAdminTest extends WebTestCase
+class CategoryAdminTest extends BaseWeb
 {
 
     public function testList()
     {
-
-        self::bootKernel();
-
         $category = self::$container->get('doctrine')->getRepository(Category::class)->findOneBy(array());
 
-        $client = static::createClient();
-
-        $crawler = $client->request('GET', 'admin/app/category/list');
+        $crawler = $this->client->request('GET', 'admin/app/category/list');
 
         if (!$category) {
 
@@ -46,10 +40,7 @@ class CategoryAdminTest extends WebTestCase
     public function testAddEdit()
     {
 
-        self::bootKernel();
-
-        $client = static::createClient();
-        $crawler = $client->request('GET', 'admin/app/category/create');
+        $crawler = $this->client->request('GET', 'admin/app/category/create');
 
         $send_button = $crawler->selectButton('Create');
 
@@ -57,7 +48,7 @@ class CategoryAdminTest extends WebTestCase
             'sec4809de79[name]' => 'Test',
         ));
 
-        $crawler = $client->submit($form);
+        $crawler = $this->client->submit($form);
 
         $category = self::$container->get('doctrine')->getRepository(Category::class)->findOneBy(array('name' => 'Test'));
         $this->assertTrue(!empty($category));
@@ -66,7 +57,7 @@ class CategoryAdminTest extends WebTestCase
 
         $link = $crawler->filter('a')->attr('href');
 
-        $crawler = $client->request('GET', $link);
+        $crawler = $this->client->request('GET', $link);
 
         $send_button = $crawler->selectButton('Update');
 
@@ -74,32 +65,33 @@ class CategoryAdminTest extends WebTestCase
             'sec4809de79[name]' => 'Hu4thahr',
         ));
 
-        $crawler = $client->submit($form);
+        $crawler = $this->client->submit($form);
 
         $category = self::$container->get('doctrine')->getRepository(Category::class)->findOneBy(array('name' => 'Hu4thahr'));
         $this->assertTrue(!empty($category));
 
         $blogPostTest = new BlogPostAdminTest();
+        $blogPostTest->setUp();
         $blogPostTest->AddEdit();
 
         $this->assertTrue($crawler->filter('html:contains("Redirecting to")')->count() > 0);
 
         $link = $crawler->filter('a')->attr('href');
 
-        $crawler = $client->request('GET', $link);
+        $crawler = $this->client->request('GET', $link);
 
         $button = $crawler
             ->filter('a:contains("Delete")')
             ->eq(0)
             ->link();
 
-        $crawler = $client->click($button);
+        $crawler = $this->client->click($button);
 
         $send_button = $crawler->selectButton('Yes, delete');
 
         $form = $send_button->form();
 
-        $crawler = $client->submit($form);
+        $crawler = $this->client->submit($form);
 
         $this->assertTrue($crawler->filter('html:contains("Redirecting to")')->count() > 0);
 

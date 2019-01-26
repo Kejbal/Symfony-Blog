@@ -4,21 +4,16 @@ namespace App\Tests\Admin;
 
 use App\Entity\BlogPost;
 use App\Entity\Category;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class BlogPostAdminTest extends WebTestCase
+class BlogPostAdminTest extends BaseWeb
 {
 
     public function testList()
     {
 
-        self::bootKernel();
-
         $post = self::$container->get('doctrine')->getRepository(BlogPost::class)->findOneBy(array());
 
-        $client = static::createClient();
-
-        $crawler = $client->request('GET', 'admin/app/blogpost/list');
+        $crawler = $this->client->request('GET', 'admin/app/blogpost/list');
 
         if (!$post) {
 
@@ -55,12 +50,10 @@ class BlogPostAdminTest extends WebTestCase
 
     public function AddEdit()
     {
-        self::bootKernel();
 
         $category = self::$container->get('doctrine')->getRepository(Category::class)->findOneBy(array());
 
-        $client = static::createClient();
-        $crawler = $client->request('GET', 'admin/app/blogpost/create');
+        $crawler = $this->client->request('GET', 'admin/app/blogpost/create');
 
         $category_id = $category->getId();
 
@@ -72,7 +65,7 @@ class BlogPostAdminTest extends WebTestCase
             's5d37a1acbf[category]' => $category_id,
             's5d37a1acbf[draft]' => true,
         ));
-        $crawler = $client->submit($form);
+        $crawler = $this->client->submit($form);
 
         $post = self::$container->get('doctrine')->getRepository(BlogPost::class)->findOneBy(array('title' => 'Meik8ree', 'category' => $category_id));
         $this->assertTrue(!empty($post));
@@ -80,7 +73,7 @@ class BlogPostAdminTest extends WebTestCase
         $this->assertTrue($crawler->filter('html:contains("Redirecting to")')->count() > 0);
 
         $link = $crawler->filter('a')->attr('href');
-        $crawler = $client->request('GET', $link);
+        $crawler = $this->client->request('GET', $link);
 
         $send_button = $crawler->selectButton('Update');
         $form = $send_button->form(array(
@@ -89,7 +82,7 @@ class BlogPostAdminTest extends WebTestCase
             's5d37a1acbf[category]' => $category_id,
             's5d37a1acbf[draft]' => true,
         ));
-        $crawler = $client->submit($form);
+        $crawler = $this->client->submit($form);
 
         $post = self::$container->get('doctrine')->getRepository(BlogPost::class)->findOneBy(array('title' => 'Aaphoo9k', 'category' => $category_id));
         $this->assertTrue(!empty($post));
@@ -97,20 +90,20 @@ class BlogPostAdminTest extends WebTestCase
         $this->assertTrue($crawler->filter('html:contains("Redirecting to")')->count() > 0);
 
         $link = $crawler->filter('a')->attr('href');
-        $crawler = $client->request('GET', $link);
+        $crawler = $this->client->request('GET', $link);
 
         $button = $crawler
             ->filter('a:contains("Delete")')
             ->eq(0)
             ->link();
 
-        $crawler = $client->click($button);
+        $crawler = $this->client->click($button);
 
         $send_button = $crawler->selectButton('Yes, delete');
 
         $form = $send_button->form();
 
-        $crawler = $client->submit($form);
+        $crawler = $this->client->submit($form);
 
         $this->assertTrue($crawler->filter('html:contains("Redirecting to")')->count() > 0);
 

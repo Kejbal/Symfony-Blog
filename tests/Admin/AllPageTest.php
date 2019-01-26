@@ -2,9 +2,7 @@
 
 namespace App\Tests\Admin;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-
-class AllPageTest extends WebTestCase
+class AllPageTest extends BaseWeb
 {
 
     /**
@@ -14,12 +12,12 @@ class AllPageTest extends WebTestCase
     public function testPageIsSuccessful($url)
     {
 
-        $client = self::createClient();
-        $crawler = $client->request('GET', $url);
+        $crawler = $this->client->request('GET', $url);
 
-        $this->assertTrue($client->getResponse()->isSuccessful());
+        $this->assertTrue($this->client->getResponse()->isSuccessful());
 
-        if ($url !== 'admin/app/login') {
+        if ($url !== 'admin/login') {
+
             $menu = new Menu();
             $menu->Menu($crawler);
         }
@@ -33,7 +31,8 @@ class AllPageTest extends WebTestCase
             array('admin/app/blogpost/create'),
             array('admin/app/category/list'),
             array('admin/app/category/create'),
-            //array('admin/app/login'),
+            array('admin/login'),
         );
     }
+
 }
