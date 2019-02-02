@@ -52,10 +52,14 @@ class BlogPostAdminTest extends BaseWeb
     {
 
         $category = self::$container->get('doctrine')->getRepository(Category::class)->findOneBy(array());
+        $category_id = $category->getId();
 
         $crawler = $this->client->request('GET', 'admin/app/blogpost/create');
 
-        $category_id = $category->getId();
+        $this->assertGreaterThan(
+            0,
+            $crawler->filter('textarea.ckeditor')->count()
+        );
 
         $send_button = $crawler->selectButton('Create');
 

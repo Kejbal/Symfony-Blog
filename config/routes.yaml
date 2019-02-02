@@ -3,6 +3,10 @@
 #    controller: App\Controller\DefaultController::index
 # config/routes/sonata_admin.yaml
 
+index:
+    path:     /
+    controller: App\Controller\IndexController::index
+
 admin_area:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
     prefix: /admin

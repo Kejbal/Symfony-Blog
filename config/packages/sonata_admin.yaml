@@ -5,7 +5,6 @@ sonata_admin:
             - { type: sonata.admin.block.admin_list, position: left }
 
 
-
 sonata_block:
     blocks:
         sonata.admin.block.admin_list:
