@@ -19,11 +19,8 @@ class AllPageTest extends WebTestCase
 
         $this->assertTrue($client->getResponse()->isSuccessful());
 
-        /*if ($url !== 'admin/login') {
-
-    $menu = new Menu();
-    $menu->Menu($crawler);
-    }*/
+        $menu = new Menu();
+        $menu->Menu($crawler);
     }
 
     public function provideUrls()
