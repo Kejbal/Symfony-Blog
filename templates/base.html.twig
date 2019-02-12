@@ -28,15 +28,12 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="about.html">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="post.html">Sample Post</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contact</a>
-                        </li>
+                        {% for link in links %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/category/post/{{ link.getId() }}">
+                                    {{ link.getName() }}</a>
+                            </li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
