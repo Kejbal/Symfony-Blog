@@ -9,6 +9,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -18,6 +19,7 @@ class BlogPostAdmin extends AbstractAdmin
     {
         $formMapper
             ->add('title', TextType::class)
+            ->add('subtitle', TextType::class)
             ->add('body', TextareaType::class, ['attr' => [
                 'class' => 'ckeditor',
             ]])
@@ -29,7 +31,12 @@ class BlogPostAdmin extends AbstractAdmin
                 'choices' => array(
                     'Yes' => true,
                     'No' => false,
-                )));
+                )))
+        ;
+
+        if (!$this->isCurrentRoute('create')) {
+            $formMapper->add('date', DateTimeType::class);
+        }
 
     }
 

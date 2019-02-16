@@ -62,9 +62,9 @@ class BlogPostAdminTest extends BaseWeb
         );
 
         $send_button = $crawler->selectButton('Create');
-
         $form = $send_button->form(array(
             's5d37a1acbf[title]' => 'Meik8ree',
+            's5d37a1acbf[subtitle]' => 'uT6eSh9h',
             's5d37a1acbf[body]' => '<div>test</div>',
             's5d37a1acbf[category]' => $category_id,
             's5d37a1acbf[draft]' => true,
@@ -82,9 +82,15 @@ class BlogPostAdminTest extends BaseWeb
         $send_button = $crawler->selectButton('Update');
         $form = $send_button->form(array(
             's5d37a1acbf[title]' => 'Aaphoo9k',
+            's5d37a1acbf[subtitle]' => 'wepuL4qu',
             's5d37a1acbf[body]' => '<div>test</div>',
             's5d37a1acbf[category]' => $category_id,
             's5d37a1acbf[draft]' => true,
+            's5d37a1acbf[date][date][month]' => 3,
+            's5d37a1acbf[date][date][day]' => 22,
+            's5d37a1acbf[date][date][year]' => 2018,
+            's5d37a1acbf[date][time][hour]' => 2,
+            's5d37a1acbf[date][time][minute]' => 55,
         ));
         $crawler = $this->client->submit($form);
 

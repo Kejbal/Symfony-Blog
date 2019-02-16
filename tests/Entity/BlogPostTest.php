@@ -19,6 +19,9 @@ class BlogPostTest extends TestCase
         $post->setTitle('Title');
         $this->assertEquals("Title", $post->getTitle());
 
+        $post->setSubtitle('SubTitle');
+        $this->assertEquals("SubTitle", $post->getSubtitle());
+
         $post->setBody('<div>Body</div>');
         $this->assertEquals("<div>Body</div>", $post->getBody());
 
@@ -29,6 +32,10 @@ class BlogPostTest extends TestCase
         $category->setName('test');
         $post->setCategory($category);
         $this->assertEquals($category, $post->getCategory());
+
+        $date = new \DateTime('2018-05-10 12:57:12');
+        $post->setDate($date);
+        $this->assertEquals($date, $post->getDate());
 
     }
 }
