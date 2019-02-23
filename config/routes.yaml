@@ -11,6 +11,16 @@ index:
     requirements:
         page: '\d+'
 
+category:
+    path:     /category/{category_id}/{page}
+    controller: App\Controller\CategoryController::index
+    defaults:
+        category_id: 0
+        page: 1
+    requirements:
+        category_id: '\d+'
+        page: '\d+'
+
 admin_area:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
     prefix: /admin

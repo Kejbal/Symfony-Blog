@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+{% block body%}
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                {% for post in posts %}
+                    <div class="post-preview">
+                        <a href="#">
+                            <h2 class="post-title">
+                                {{ post.getTitle() }}
+                            </h2>
+                            <h3 class="post-subtitle">
+                                {{ post.getSubtitle() }}
+                            </h3>
+                        </a>
+                        <p class="post-meta">Posted by
+                            <a href="#">Kejbal</a>
+                            on
+                            {{ post.getDate() | date('H:i:s d M Y') }}</p>
+                    </div>
+                    <hr>
+                    {% endfor %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            {% if show_button_newer %}
+                                <div class="clearfix" id="newer-posts">
+                                    <a class="btn btn-primary float-left" href="{{url('category')~'/'~current_category~'/'~(current_page-1)}}">&larr; Newer Posts
+                                    </a>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            {% if show_button_older %}
+                                <div class="clearfix" id="older-posts">
+                                    <a class="btn btn-primary float-right" href="{{url('category')~'/'~current_category~'/'~(current_page+1)}}">Older Posts &rarr;</a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

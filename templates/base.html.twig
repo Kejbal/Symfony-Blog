@@ -6,13 +6,13 @@
             {% block title %}Kejbal{% endblock %}
         </title>
         {% block stylesheets %}{% endblock %}
-        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
+        <link href="{{url('index')}}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
         <!-- Custom fonts for this template -->
-        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"></link>
+        <link href="{{url('index')}}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"></link>
         <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'></link>
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'></link>
         <!-- Custom styles for this template -->
-        <link href="css/clean-blog.min.css" rel="stylesheet"></link>
+        <link href="{{url('index')}}/css/clean-blog.min.css" rel="stylesheet"></link>
     </head>
     <body>
         <!-- Navigation -->
@@ -31,7 +31,7 @@
                         {% if links %}
                             {% for link in links %}
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/category/post/{{ link.getId() }}">
+                                    <a class="nav-link" href="/category/{{ link.getId() }}">
                                         {{ link.getName() }}</a>
                                 </li>
                             {% endfor %}
@@ -41,7 +41,7 @@
             </div>
         </nav>
         <!-- Page Header -->
-        <header class="masthead" style="background-image: url('img/home-bg.jpg')">
+        <header class="masthead" style="background-image: url('{{url('index')}}/img/home-bg.jpg')">
             <div class="overlay"></div>
             <div class="container">
                 <div class="row">
@@ -94,9 +94,9 @@
             </footer>
             {% block javascripts %}{% endblock %}
             <!-- Bootstrap core JavaScript -->
-            <script src="vendor/jquery/jquery.min.js"></script>
-            <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <script src="{{url('index')}}/vendor/jquery/jquery.min.js"></script>
+            <script src="{{url('index')}}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
             <!-- Custom scripts for this template -->
-            <script src="js/clean-blog.min.js"></script>
+            <script src="{{url('index')}}/js/clean-blog.min.js"></script>
         </body>
     </html>
