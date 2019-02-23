@@ -4,8 +4,12 @@
 # config/routes/sonata_admin.yaml
 
 index:
-    path:     /
+    path:     /{page}
     controller: App\Controller\IndexController::index
+    defaults:
+        page: 1
+    requirements:
+        page: '\d+'
 
 admin_area:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
