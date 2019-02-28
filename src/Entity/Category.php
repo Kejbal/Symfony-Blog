@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Service\UrlService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -27,6 +28,11 @@ class Category
      * @ORM\OneToMany(targetEntity="App\Entity\BlogPost", mappedBy="category")
      */
     private $BlogPost;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -80,4 +86,18 @@ class Category
 
         return $this;
     }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $slug = UrlService::slug($slug);
+        $this->slug = $slug;
+
+        return $this;
+    }
+
 }

@@ -39,7 +39,7 @@ class Menu extends WebTestCase
             );
 
             $this->assertEquals(
-                '/category/' . $manu_link->getId(),
+                '/category/' . $manu_link->getSlug(),
                 $crawler->filter('.nav-link:contains("' . $manu_link->getName() . '")')->attr('href')
             );
         }

@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Repository\BlogPostRepository;
 use App\Repository\CategoryRepository;
+use App\Service\UrlService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -15,7 +17,21 @@ class CategoryController extends ControllerBase
     public function index(Request $request, CategoryRepository $category, BlogPostRepository $blog_post)
     {
         $page = (int) $request->attributes->get('page');
-        $category_id = (int) $request->attributes->get('category_id');
+        $slug = $request->attributes->get('slug');
+
+        if (is_numeric($slug)) {
+            $category_id = (int) $request->attributes->get('slug');
+            if ($category_id > 0) {
+                $category_row = $category->findOneBy(['category_id' => $category_id]);
+            } else {
+                $category_row = new Category;
+            }
+        } else {
+            $slug = UrlService::slug($slug);
+            $category_row = $category->findOneBy(['slug' => $slug]);
+            $category_id = $category_row->getId();
+        }
+
         $limit = 5;
         $show_button_older = false;
         $show_button_newer = false;
@@ -47,7 +63,7 @@ class CategoryController extends ControllerBase
         $this->_data_view['show_button_older'] = $show_button_older;
         $this->_data_view['show_button_newer'] = $show_button_newer;
         $this->_data_view['current_page'] = $page;
-        $this->_data_view['current_category'] = $category_id;
+        $this->_data_view['current_category'] = ($category_row->getSlug() ? $category_row->getSlug() : $category_row->getId());
 
         $this->_data_view['controller_name'] = 'CategoryController';
         return $this->render('category/index.html.twig', $this->_data_view);

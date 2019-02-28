@@ -2,101 +2,52 @@
 <html>
     <head>
         <meta charset="UTF-8"></meta>
-        <title>
-            {% block title %}Kejbal{% endblock %}
-        </title>
-        {% block stylesheets %}{% endblock %}
-        <link href="{{url('index')}}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
-        <!-- Custom fonts for this template -->
-        <link href="{{url('index')}}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"></link>
-        <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'></link>
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'></link>
-        <!-- Custom styles for this template -->
-        <link href="{{url('index')}}/css/clean-blog.min.css" rel="stylesheet"></link>
-    </head>
-    <body>
-        <!-- Navigation -->
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-            <div class="container">
-                <a class="navbar-brand" href="index.html">Start Bootstrap</a>
-                <button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button">
-                    Menu
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/">Home</a>
-                        </li>
-                        {% if links %}
-                            {% for link in links %}
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/category/{{ link.getId() }}">
-                                        {{ link.getName() }}</a>
-                                </li>
-                            {% endfor %}
-                        {% endif %}
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <!-- Page Header -->
-        <header class="masthead" style="background-image: url('{{url('index')}}/img/home-bg.jpg')">
-            <div class="overlay"></div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-md-10 mx-auto">
-                        <div class="site-heading">
-                            <h1>Clean Blog</h1>
-                            <span class="subheading">A Blog Theme by Start Bootstrap</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-        {% block body %}{% endblock %}
-        <hr>
-            <!-- Footer -->
-            <footer>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 col-md-10 mx-auto">
-                            <ul class="list-inline text-center">
-                                <li class="list-inline-item">
-                                    <a href="#">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fas fa-circle fa-stack-2x"></i>
-                                            <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fas fa-circle fa-stack-2x"></i>
-                                            <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fas fa-circle fa-stack-2x"></i>
-                                            <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <p class="copyright text-muted">Copyright &copy; Your Website 2019</p>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-            {% block javascripts %}{% endblock %}
-            <!-- Bootstrap core JavaScript -->
-            <script src="{{url('index')}}/vendor/jquery/jquery.min.js"></script>
-            <script src="{{url('index')}}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-            <!-- Custom scripts for this template -->
-            <script src="{{url('index')}}/js/clean-blog.min.js"></script>
-        </body>
-    </html>
+    <title>
+        {% block title %}Kejbal{% endblock %}
+    </title>
+    {% block stylesheets %}{% endblock %}
+    <link href="{{url('index')}}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
+<!-- Custom fonts for this template -->
+<link href="{{url('index')}}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"></link><link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'></link><link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'></link><!-- Custom styles for this template --><link href="{{url('index')}}/css/clean-blog.min.css" rel="stylesheet"></link></head><body><!-- Navigation --><nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav"><div class="container"><a class="navbar-brand" href="index.html">Start Bootstrap</a><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button">Menu<i class="fas fa-bars"></i></button><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="navbar-nav ml-auto">
+<li class="nav-item">
+    <a class="nav-link" href="/">Home</a>
+</li>
+{% if links %}
+    {% for link in links %}
+        <li class="nav-item">
+            <a class="nav-link" href="/category/{{ link.getSlug() }}">
+                {{ link.getName() }}</a>
+        </li>
+    {% endfor %}
+{% endif %}</ul></div></div></nav><!-- Page Header --><header class="masthead" style="background-image: url('{{url('index')}}/img/home-bg.jpg')"><div class="overlay"></div><div class="container"><div class="row"><div class="col-lg-8 col-md-10 mx-auto">
+<div class="site-heading">
+    <h1>Clean Blog</h1>
+    <span class="subheading">A Blog Theme by Start Bootstrap</span>
+</div></div></div></div></header>{% block body %}{% endblock %}<hr><!-- Footer --><footer><div class="container"><div class="row"><div class="col-lg-8 col-md-10 mx-auto">
+<ul class="list-inline text-center">
+    <li class="list-inline-item">
+        <a href="#">
+            <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+            </span>
+        </a>
+    </li>
+    <li class="list-inline-item">
+        <a href="#">
+            <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+            </span>
+        </a>
+    </li>
+    <li class="list-inline-item">
+        <a href="#">
+            <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+            </span>
+        </a>
+    </li>
+</ul>
+<p class="copyright text-muted">Copyright &copy; Your Website 2019</p></div></div></div></footer>{% block javascripts %}{% endblock %}<!-- Bootstrap core JavaScript --><script src="{{url('index')}}/vendor/jquery/jquery.min.js"></script><script src="{{url('index')}}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script><!-- Custom scripts for this template --><script src="{{url('index')}}/js/clean-blog.min.js"></script></body></html>

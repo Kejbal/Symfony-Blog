@@ -21,7 +21,7 @@ class CategoryTest extends BaseWeb
 
             if (count($all_posts) > 0) {
                 for ($page = 1; $page <= $number_page; $page++) {
-                    $crawler = $this->client->request('GET', '/category/' . $category->getId() . '/' . $page
+                    $crawler = $this->client->request('GET', '/category/' . $category->getSlug() . '/' . $page
                     );
 
                     $posts = self::$container->get('doctrine')->getRepository(BlogPost::class)->findBy(['draft' => '0', 'category' => $category->getId()], ['id' => 'DESC'], $per_page, ($page - 1) * $per_page);
@@ -36,7 +36,7 @@ class CategoryTest extends BaseWeb
                         $this->assertEquals(1, $crawler->filter('#newer-posts:contains("Newer Posts")')->count());
                         $newer_page = $page - 1;
                         $this->assertContains(
-                            '/category/' . $category->getId() . '/' . $newer_page,
+                            '/category/' . $category->getSlug() . '/' . $newer_page,
                             $crawler->filter('#newer-posts a:contains("Newer Posts")')->attr('href')
                         );
                     }
@@ -45,7 +45,7 @@ class CategoryTest extends BaseWeb
                         $this->assertEquals(1, $crawler->filter('#older-posts:contains("Older Posts")')->count());
                         $older_page = $page + 1;
                         $this->assertContains(
-                            '/category/' . $category->getId() . '/' . $older_page,
+                            '/category/' . $category->getSlug() . '/' . $older_page,
                             $crawler->filter('#older-posts a:contains("Older Posts")')->attr('href')
                         );
                     }

@@ -4,6 +4,7 @@ namespace App\Tests\Admin;
 
 use App\Entity\BlogPost;
 use App\Entity\Category;
+use App\Service\UrlService;
 use PHPUnit\Framework\TestCase;
 
 class CategoryTest extends TestCase
@@ -18,6 +19,9 @@ class CategoryTest extends TestCase
 
         $category->setName('Name');
         $this->assertEquals("Name", $category->getName());
+
+        $slug = UrlService::slug($category->getName());
+        $this->assertEquals($slug, $category->getSlug());
 
         $post = new BlogPost();
 

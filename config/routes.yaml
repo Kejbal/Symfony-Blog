@@ -12,13 +12,13 @@ index:
         page: '\d+'
 
 category:
-    path:     /category/{category_id}/{page}
+    path:     /category/{slug}/{page}
     controller: App\Controller\CategoryController::index
     defaults:
-        category_id: 0
+        slug: 0
         page: 1
     requirements:
-        category_id: '\d+'
+        slug: '[a-z0-9-]+'
         page: '\d+'
 
 admin_area:
