@@ -1,0 +1,41 @@
+{% extends 'post.html.twig' %}
+{% block title %}Post{% endblock %}
+{% block body %}
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('{{url('index')}}img/post-bg.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="post-heading">
+                        {% if post == false %}
+                            <h1>Sorry no Post on this url</h1>
+                            {% else %}
+                            <h1>
+                                {{ post.getTitle() }}</h1>
+                            <h2 class="subheading">
+                                {{ post.getSubtitle() }}</h2>
+                            <span class="meta">Posted by
+                                <a href="#">Kejbal</a>
+                                on
+                                {{ post.getDate() | date('H:i:s d M Y') }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            {% if post != false %}
+                <div class="row">
+                    <div class="col-lg-8 col-md-10 mx-auto">
+                        {{ post.getBody() | raw }}
+                    </div>
+                {% endif %}
+            </div>
+        </article>
+        <hr>
+        {% endblock %}
+    

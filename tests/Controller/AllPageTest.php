@@ -28,6 +28,7 @@ class AllPageTest extends WebTestCase
         return array(
             array(''),
             array('/category'),
+            array('/post'),
         );
     }
 
