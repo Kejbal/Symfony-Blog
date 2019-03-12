@@ -1,5 +1,5 @@
 <?php
-// src/Admin/CategoryAdmin.php
+// src/Admin/UserAdmin.php
 namespace App\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;

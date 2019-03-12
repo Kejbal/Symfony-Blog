@@ -53,6 +53,7 @@ services:
         autowire: true
         tags:
             - { name: doctrine.event_subscriber }
+
     app.doctrine.category_slug_listener:
         class: App\Doctrine\CategorySlugListener
         autowire: true

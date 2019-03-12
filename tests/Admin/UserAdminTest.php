@@ -62,7 +62,7 @@ class UserAdminTest extends BaseWeb
         $user = self::$container->get('doctrine')->getRepository(User::class)->findOneBy(array());
         $this->assertTrue(!empty($user));
 
-        $crawler = $this->client->request('GET', 'admin/app/user/create');
+        $crawler = $this->client->request('GET', '/admin/app/user/create');
 
         $send_button = $crawler->selectButton('Create');
 
@@ -80,6 +80,21 @@ class UserAdminTest extends BaseWeb
         $this->assertTrue($crawler->filter('html:contains("Redirecting to")')->count() > 0);
 
         $link = $crawler->filter('a')->attr('href');
+
+        $crawler = $this->client->request('GET', '/admin/app/user/create');
+
+        $send_button = $crawler->selectButton('Create');
+
+        $form = $send_button->form(array(
+            's8feb4ca090[email]' => 'admin1@admin.com',
+            's8feb4ca090[plainPassword]' => 'El4aiyoh',
+            's8feb4ca090[roles]' => array('ROLE_ADMIN'),
+            's8feb4ca090[status]' => true,
+        ));
+        $crawler = $this->client->submit($form);
+
+        $this->assertTrue($crawler->filter('.list-unstyled:contains("This value is already used")')->count() > 0);
+
         $crawler = $this->client->request('GET', $link);
 
         $send_button = $crawler->selectButton('Update');
