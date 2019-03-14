@@ -89,12 +89,6 @@ class CategoryAdminTest extends BaseWeb
 
         $this->assertTrue($crawler->filter('html:contains("Redirecting to")')->count() > 0);
 
-        $link2 = $crawler->filter('a')->attr('href');
-
-        $crawler = $this->client->request('GET', $link2);
-
-        $this->assertTrue($crawler->filter('.list-unstyled:contains("This value is already used")')->count() > 0);
-
         $crawler = $this->client->request('GET', $link);
 
         $button = $crawler

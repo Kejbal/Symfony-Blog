@@ -60,5 +60,11 @@ services:
         tags:
             - { name: doctrine.event_subscriber }
 
+    app.doctrine.blog_post_slug_listener:
+        class: App\Doctrine\BlogPostSlugListener
+        autowire: true
+        tags:
+            - { name: doctrine.event_subscriber }
+
 
 

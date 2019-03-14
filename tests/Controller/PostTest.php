@@ -20,7 +20,7 @@ class PostTest extends BaseWeb
             $crawler = $this->client->request('GET', '/post/' . $post->getId());
 
             $this->assertEquals(1, $crawler->filter('h1:contains("' . $post->getTitle() . '")')->count());
-            $this->assertEquals(1, $crawler->filter('h2.subheading:contains("' . $post->getTitle() . '")')->count());
+            $this->assertEquals(1, $crawler->filter('h2.subheading:contains("' . $post->getSubTitle() . '")')->count());
             $this->assertEquals(1, $crawler->filter('span.meta:contains("' . $post->getDate()->format('H:i:s d M Y') . '")')->count());
             $this->assertNotEmpty($crawler->filter('div.mx-auto'));
 

@@ -22,6 +22,9 @@ class BlogPostTest extends TestCase
         $post->setSubtitle('SubTitle');
         $this->assertEquals("SubTitle", $post->getSubtitle());
 
+        $post->setSlug('Ah#l4 p!Ein');
+        $this->assertEquals('ah-l4-p-ein', $post->getSlug());
+
         $post->setBody('<div>Body</div>');
         $this->assertEquals("<div>Body</div>", $post->getBody());
 
