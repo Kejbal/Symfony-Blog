@@ -27,7 +27,7 @@ class CategoryTest extends BaseWeb
                     $posts = self::$container->get('doctrine')->getRepository(BlogPost::class)->findBy(['draft' => '0', 'category' => $category->getId()], ['id' => 'DESC'], $per_page, ($page - 1) * $per_page);
 
                     foreach ($posts as $post) {
-                        $this->assertEquals(1, $crawler->filter('.post-preview a[href="http://localhost/post/' . $post->getId() . '"]')->count());
+                        $this->assertEquals(1, $crawler->filter('.post-preview a[href="http://localhost/post/' . $post->getSlug() . '"]')->count());
 
                         $this->assertEquals(1, $crawler->filter('h2.post-title:contains("' . $post->getTitle() . '")')->count());
                         $this->assertEquals(1, $crawler->filter('h3.post-subtitle:contains("' . $post->getSubtitle() . '")')->count());

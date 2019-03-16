@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Repository\BlogPostRepository;
+use App\Entity\BlogPost;
+use App\Service\UrlService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -14,12 +16,18 @@ class PostController extends ControllerBase
     public function index(Request $request, BlogPostRepository $blog_post)
     {
 
-        $post_id = $request->attributes->get('post_id');
+        $slug = $request->attributes->get('slug');
 
-        if ($post_id) {
-            $post = $blog_post->findOneBy(['id' => $post_id]);
-        } else {
-            $post = false;
+        if (is_numeric($slug)) {
+            $post_id = (int) $request->attributes->get('slug');
+            if ($post_id > 0) {
+                $post = $blog_post->findOneBy(['id' => $slug]);
+            } else {
+                $post = new BlogPost;
+            }
+        } elseif (!empty($slug)) {
+            $slug = UrlService::slug($slug);
+            $post = $blog_post->findOneBy(['slug' => $slug]);
         }
 
         $this->_data_view['post'] = $post;

@@ -17,7 +17,7 @@ class PostTest extends BaseWeb
         shuffle($all_posts);
         $random_posts = array_slice($all_posts, 0, 5);
         foreach ($random_posts as $post) {
-            $crawler = $this->client->request('GET', '/post/' . $post->getId());
+            $crawler = $this->client->request('GET', '/post/' . $post->getSlug());
 
             $this->assertEquals(1, $crawler->filter('h1:contains("' . $post->getTitle() . '")')->count());
             $this->assertEquals(1, $crawler->filter('h2.subheading:contains("' . $post->getSubTitle() . '")')->count());

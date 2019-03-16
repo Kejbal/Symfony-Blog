@@ -22,12 +22,12 @@ category:
         page: '\d+'
 
 post:
-    path:     /post/{post_id}
+    path:     /post/{slug}
     controller: App\Controller\PostController::index
     defaults:
-        post_id: 0
+        slug: 0
     requirements:
-        post_id: '\d+'
+        slug: '[a-z0-9-]+'
 
 admin_area:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'

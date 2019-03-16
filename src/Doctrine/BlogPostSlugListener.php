@@ -29,10 +29,10 @@ class BlogPostSlugListener implements EventSubscriber
         $i=0;
         do {
             if ($entity->getId()) {
-                $post_row=$em->createQuery('SELECT bp FROM App:BlogPost bp WHERE bp.slug=:slug AND  bp.id!=:id ORDER BY bp.name ASC')->setParameter('slug', $entity->getSlug())->setParameter('id', $entity->getId())
+                $post_row=$em->createQuery('SELECT bp FROM App:BlogPost bp WHERE bp.slug=:slug AND  bp.id!=:id ORDER BY bp.id ASC')->setParameter('slug', $entity->getSlug())->setParameter('id', $entity->getId())
                 ->getResult();
             } else {
-                $post_row=$em->createQuery('SELECT bp FROM App:BlogPost bp WHERE bp.slug=:slug ORDER BY bp.name ASC')->setParameter('slug', $entity->getSlug())
+                $post_row=$em->createQuery('SELECT bp FROM App:BlogPost bp WHERE bp.slug=:slug ORDER BY bp.id ASC')->setParameter('slug', $entity->getSlug())
                 ->getResult();
             }
 
