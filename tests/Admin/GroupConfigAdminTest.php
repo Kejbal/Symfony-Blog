@@ -2,19 +2,18 @@
 
 namespace App\Tests\Admin;
 
-use App\Entity\Category;
-use App\Tests\Admin\BlogPostAdminTest;
+use App\Entity\GroupConfig;
 
-class CategoryAdminTest extends BaseWeb
+class GroupConfigAdminTest extends BaseWeb
 {
 
     public function testList()
     {
-        $category = self::$container->get('doctrine')->getRepository(Category::class)->findOneBy(array());
+        $group = self::$container->get('doctrine')->getRepository(GroupConfig::class)->findOneBy(array());
 
-        $crawler = $this->client->request('GET', 'admin/app/category/list');
+        $crawler = $this->client->request('GET', 'admin/app/groupconfig/list');
 
-        if (!$category) {
+        if (!$group) {
 
             $this->assertGreaterThan(
                 0,
@@ -40,17 +39,17 @@ class CategoryAdminTest extends BaseWeb
     public function testAddEdit()
     {
 
-        $crawler = $this->client->request('GET', 'admin/app/category/create');
+        $crawler = $this->client->request('GET', 'admin/app/groupconfig/create');
 
         $send_button = $crawler->selectButton('Create');
 
         $form = $send_button->form(array(
-            'sec4809de79[name]' => 'Test',
+            's44b5fcc36a[name]' => 'Group',
         ));
 
         $crawler = $this->client->submit($form);
 
-        $category = self::$container->get('doctrine')->getRepository(Category::class)->findOneBy(array('name' => 'Test'));
+        $category = self::$container->get('doctrine')->getRepository(GroupConfig::class)->findOneBy(array('name' => 'Group'));
         $this->assertTrue(!empty($category));
 
         $this->assertTrue($crawler->filter('html:contains("Redirecting to")')->count() > 0);
@@ -62,23 +61,21 @@ class CategoryAdminTest extends BaseWeb
         $send_button = $crawler->selectButton('Update');
 
         $form = $send_button->form(array(
-            'sec4809de79[name]' => 'Hu4thahr',
+            's44b5fcc36a[name]' => 'Bahd4Sut',
         ));
 
         $crawler = $this->client->submit($form);
 
-        $category = self::$container->get('doctrine')->getRepository(Category::class)->findOneBy(array('name' => 'Hu4thahr'));
-        $this->assertTrue(!empty($category));
+        $group = self::$container->get('doctrine')->getRepository(GroupConfig::class)->findOneBy(array('name' => 'Bahd4Sut'));
+        $this->assertTrue(!empty($group));
 
-        $blogPostTest = new BlogPostAdminTest();
+        /*$blogPostTest = new BlogPostAdminTest();
         $blogPostTest->setUp();
-        $blogPostTest->AddEdit();
+        $blogPostTest->AddEdit();*/
 
         $this->assertTrue($crawler->filter('html:contains("Redirecting to")')->count() > 0);
 
-        $link = $crawler->filter('a')->attr('href');
-
-        $crawler = $this->client->request('GET', '/admin/app/category/'.$category->getId().'/edit');
+        $crawler = $this->client->request('GET', $link);
 
         $button = $crawler
             ->filter('a:contains("Delete")')
@@ -95,8 +92,8 @@ class CategoryAdminTest extends BaseWeb
 
         $this->assertTrue($crawler->filter('html:contains("Redirecting to")')->count() > 0);
 
-        $category = self::$container->get('doctrine')->getRepository(Category::class)->findOneBy(array('name' => 'thiX4sei'));
-        $this->assertTrue(!$category);
+        $group = self::$container->get('doctrine')->getRepository(GroupConfig::class)->findOneBy(array('name' => 'Bahd4Sut'));
+        $this->assertTrue(!$group);
 
     }
 

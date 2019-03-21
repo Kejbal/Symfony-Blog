@@ -47,6 +47,20 @@ services:
             - { name: sonata.admin, manager_type: orm, group: "User", label: User }
         public: true
 
+    admin.group_config:
+        class: App\Admin\GroupConfigAdmin
+        arguments: [~, App\Entity\GroupConfig, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Config", label: Group }
+        public: true
+
+    admin.config:
+        class: App\Admin\ConfigAdmin
+        arguments: [~, App\Entity\Config, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Config", label: Config }
+        public: true
+
     app.doctrine.hash_password_listener:
         class: App\Doctrine\HashPasswordListener
         arguments: ['@security.password_encoder']
