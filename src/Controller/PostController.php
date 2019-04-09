@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Repository\BlogPostRepository;
 use App\Entity\BlogPost;
+use App\Repository\BlogPostRepository;
 use App\Service\UrlService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;

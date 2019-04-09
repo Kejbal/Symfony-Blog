@@ -69,10 +69,6 @@ class GroupConfigAdminTest extends BaseWeb
         $group = self::$container->get('doctrine')->getRepository(GroupConfig::class)->findOneBy(array('name' => 'Bahd4Sut'));
         $this->assertTrue(!empty($group));
 
-        /*$blogPostTest = new BlogPostAdminTest();
-        $blogPostTest->setUp();
-        $blogPostTest->AddEdit();*/
-
         $this->assertTrue($crawler->filter('html:contains("Redirecting to")')->count() > 0);
 
         $crawler = $this->client->request('GET', $link);

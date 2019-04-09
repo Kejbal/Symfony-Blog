@@ -29,6 +29,7 @@ class AllPageTest extends WebTestCase
             array(''),
             array('/category'),
             array('/post'),
+            array('/contact'),
         );
     }
 
