@@ -2,7 +2,7 @@
 
 namespace App\Tests\Controller;
 
-class CategoryTest extends BaseWeb
+class ContactTest extends BaseWeb
 {
 
     public function testContact()
