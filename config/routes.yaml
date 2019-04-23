@@ -33,6 +33,10 @@ contact:
     path:     /contact
     controller: App\Controller\ContactController::index
 
+contact_mail:
+    path:     /contact/mail
+    controller: App\Controller\ContactController::mail
+
 admin_area:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
     prefix: /admin

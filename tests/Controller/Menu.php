@@ -21,6 +21,11 @@ class Menu extends WebTestCase
             $crawler->filter('.nav-link:contains("Home")')->attr('href')
         );
 
+        $this->assertEquals(
+            '/contact',
+            $crawler->filter('.nav-link:contains("Contact")')->attr('href')
+        );
+
         $categories = self::$container->get('doctrine')->getRepository(Category::class)->findBy(array());
 
         foreach ($categories as $category) {
