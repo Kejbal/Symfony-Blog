@@ -4,7 +4,9 @@
 # config/routes/sonata_admin.yaml
 
 index:
-    path:     /{page}
+    path:
+        en: /{page}
+        pl: /pl/{page}
     controller: App\Controller\IndexController::index
     defaults:
         page: 1
@@ -12,7 +14,9 @@ index:
         page: '\d+'
 
 category:
-    path:     /category/{slug}/{page}
+    path:
+        en: /category/{slug}/{page}
+        pl: /kategoria/{slug}/{page}
     controller: App\Controller\CategoryController::index
     defaults:
         slug: 0
@@ -22,7 +26,9 @@ category:
         page: '\d+'
 
 post:
-    path:     /post/{slug}
+    path:
+        en: /post/{slug}
+        pl: /wpis/{slug}
     controller: App\Controller\PostController::index
     defaults:
         slug: 0
@@ -30,8 +36,12 @@ post:
         slug: '[a-z0-9-]+'
 
 contact:
-    path:     /contact
+    path:
+        en: /contact
+        pl: /kontakt
     controller: App\Controller\ContactController::index
+
+
 
 contact_mail:
     path:     /contact/mail

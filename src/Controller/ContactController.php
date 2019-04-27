@@ -7,14 +7,20 @@ use App\Repository\GroupConfigRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ContactController extends ControllerBase
 {
     /**
      * @Route("/contact", name="contact")
      */
-    public function index(Request $request, \Swift_Mailer $mailer, ConfigRepository $config, GroupConfigRepository $groupConfig)
-    {
+    public function index(
+        Request $request,
+        \Swift_Mailer $mailer,
+        ConfigRepository $config,
+        GroupConfigRepository $groupConfig,
+        TranslatorInterface $translator
+    ) {
 
         if ($_POST) {
             if ($request->request->get('name') && $request->request->get('email') && $request->request->get('phone') && $request->request->get('message')) {

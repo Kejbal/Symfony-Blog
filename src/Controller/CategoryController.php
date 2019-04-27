@@ -16,11 +16,16 @@ class CategoryController extends ControllerBase
      */
     public function index(Request $request, CategoryRepository $category, BlogPostRepository $blog_post)
     {
-        $page = (int) $request->attributes->get('page');
+
         $slug = $request->attributes->get('slug');
+        $page = $request->attributes->get('page');
+
+        if (empty($slug)) {
+            $slug = 0;
+        }
 
         if (is_numeric($slug)) {
-            $category_id = (int) $request->attributes->get('slug');
+            $category_id = (int) $slug;
             if ($category_id > 0) {
                 $category_row = $category->findOneBy(['category_id' => $category_id]);
             } else {

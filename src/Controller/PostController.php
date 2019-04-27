@@ -18,8 +18,12 @@ class PostController extends ControllerBase
 
         $slug = $request->attributes->get('slug');
 
+        if (empty($slug)) {
+            $slug = 0;
+        }
+
         if (is_numeric($slug)) {
-            $post_id = (int) $request->attributes->get('slug');
+            $post_id = (int) $slug;
             if ($post_id > 0) {
                 $post = $blog_post->findOneBy(['id' => $slug]);
             } else {

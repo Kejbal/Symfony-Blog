@@ -20,7 +20,7 @@ class AllPageTest extends WebTestCase
         $this->assertTrue($client->getResponse()->isSuccessful());
 
         $menu = new Menu();
-        $menu->Menu($crawler);
+        $menu->Menu($crawler, $client);
     }
 
     public function provideUrls()
@@ -30,6 +30,10 @@ class AllPageTest extends WebTestCase
             array('/category'),
             array('/post'),
             array('/contact'),
+            array('/pl'),
+            array('/kategoria'),
+            array('/wpis'),
+            array('/kontakt'),
         );
     }
 

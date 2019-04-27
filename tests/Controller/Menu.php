@@ -9,22 +9,55 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 class Menu extends WebTestCase
 {
 
-    public function Menu($crawler)
+    public function Menu($crawler, $client)
     {
-        $this->assertGreaterThan(
-            0,
-            $crawler->filter('.nav-link:contains("Home")')->count()
-        );
 
-        $this->assertEquals(
-            '/',
-            $crawler->filter('.nav-link:contains("Home")')->attr('href')
-        );
+        $locale = $client->getRequest()->getLocale();
 
-        $this->assertEquals(
-            '/contact',
-            $crawler->filter('.nav-link:contains("Contact")')->attr('href')
-        );
+        if ($locale === 'en') {
+            $this->assertGreaterThan(
+                0,
+                $crawler->filter('.nav-link:contains("Home")')->count()
+            );
+
+            $this->assertEquals(
+                'http://localhost/',
+                $crawler->filter('.nav-link:contains("Home")')->attr('href')
+            );
+
+            $this->assertGreaterThan(
+                0,
+                $crawler->filter('.nav-link:contains("Contact")')->count()
+            );
+
+            $this->assertEquals(
+                'http://localhost/contact',
+                $crawler->filter('.nav-link:contains("Contact")')->attr('href')
+            );
+
+        } elseif ($locale === 'pl') {
+
+            $this->assertGreaterThan(
+                0,
+                $crawler->filter('.nav-link:contains("Strona Główna")')->count()
+            );
+
+            $this->assertEquals(
+                'http://localhost/pl',
+                $crawler->filter('.nav-link:contains("Strona Główna")')->attr('href')
+            );
+
+            $this->assertGreaterThan(
+                0,
+                $crawler->filter('.nav-link:contains("Kontakt")')->count()
+            );
+
+            $this->assertEquals(
+                'http://localhost/kontakt',
+                $crawler->filter('.nav-link:contains("Kontakt")')->attr('href')
+            );
+
+        }
 
         $categories = self::$container->get('doctrine')->getRepository(Category::class)->findBy(array());
 
