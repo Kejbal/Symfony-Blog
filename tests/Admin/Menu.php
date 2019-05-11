@@ -39,5 +39,15 @@ class Menu extends WebTestCase
             $crawler->filter('.treeview-menu > li > a:contains("User")')->attr('href')
         );
 
+        $this->assertGreaterThan(
+            0,
+            $crawler->filter('.treeview-menu > li > a:contains("Language")')->count()
+        );
+
+        $this->assertEquals(
+            '/admin/app/language/list',
+            $crawler->filter('.treeview-menu > li > a:contains("Language")')->attr('href')
+        );
+
     }
 }

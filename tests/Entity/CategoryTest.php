@@ -35,7 +35,5 @@ class CategoryTest extends TestCase
         $category->removeBlogPost($post);
         $this->assertEmpty($category->getBlogPost());
 
-        $category->getId();
-
     }
 }

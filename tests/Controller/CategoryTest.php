@@ -21,7 +21,7 @@ class CategoryTest extends BaseWeb
 
             if (count($all_posts) > 0) {
                 for ($page = 1; $page <= $number_page; $page++) {
-                    $crawler = $this->client->request('GET', '/category/' . $category->getSlug() . '/' . $page
+                    $crawler = $this->_client->request('GET', '/category/' . $category->getSlug() . '/' . $page
                     );
 
                     $posts = self::$container->get('doctrine')->getRepository(BlogPost::class)->findBy(['draft' => '0', 'category' => $category->getId()], ['id' => 'DESC'], $per_page, ($page - 1) * $per_page);

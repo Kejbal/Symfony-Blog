@@ -11,7 +11,7 @@ class IndexTest extends BaseWeb
     {
         $per_page = 5;
 
-        $crawler = $this->client->request('GET', '/');
+        $crawler = $this->_client->request('GET', '/');
 
         $posts = self::$container->get('doctrine')->getRepository(BlogPost::class)->findBy(['draft' => '0'], ['id' => 'DESC'], $per_page);
 
@@ -33,7 +33,7 @@ class IndexTest extends BaseWeb
             $number_page = ceil(count($all_posts) / $per_page);
 
             for ($page = 2; $page <= $number_page; $page++) {
-                $crawler = $this->client->request('GET', '/' . $page
+                $crawler = $this->_client->request('GET', '/' . $page
                 );
 
                 $posts = self::$container->get('doctrine')->getRepository(BlogPost::class)->findBy(['draft' => '0'], ['id' => 'DESC'], $per_page, ($page - 1) * $per_page);
