@@ -65,7 +65,7 @@ services:
         class: App\Admin\LanguageAdmin
         arguments: [~, App\Entity\Language, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Language", label: Language }
+            - { name: sonata.admin, manager_type: orm, group: "Config", label: Language }
         public: true
 
     app.doctrine.hash_password_listener:

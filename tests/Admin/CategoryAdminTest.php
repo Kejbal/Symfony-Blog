@@ -28,12 +28,22 @@ class CategoryAdminTest extends BaseWeb
                 $crawler->filter('th:contains("Name")')->count()
             );
 
+            $this->assertGreaterThan(
+                0,
+                $crawler->filter('th:contains("Language")')->count()
+            );
+
         }
 
         $this->assertGreaterThan(
             0,
             $crawler->filter('a.sonata-toggle-filter:contains("Name")')->count()
         );
+
+        /*$this->assertGreaterThan(
+    0,
+    $crawler->filter('a.sonata-toggle-filter:contains("Language")')->count()
+    );*/
 
     }
 
@@ -46,6 +56,7 @@ class CategoryAdminTest extends BaseWeb
 
         $form = $send_button->form(array(
             'sec4809de79[name]' => 'Test',
+            'sec4809de79[language]' => '1',
         ));
 
         $crawler = $this->client->submit($form);
@@ -63,6 +74,7 @@ class CategoryAdminTest extends BaseWeb
 
         $form = $send_button->form(array(
             'sec4809de79[name]' => 'Hu4thahr',
+            'sec4809de79[language]' => '2',
         ));
 
         $crawler = $this->client->submit($form);
@@ -78,7 +90,7 @@ class CategoryAdminTest extends BaseWeb
 
         $link = $crawler->filter('a')->attr('href');
 
-        $crawler = $this->client->request('GET', '/admin/app/category/'.$category->getId().'/edit');
+        $crawler = $this->client->request('GET', '/admin/app/category/' . $category->getId() . '/edit');
 
         $button = $crawler
             ->filter('a:contains("Delete")')

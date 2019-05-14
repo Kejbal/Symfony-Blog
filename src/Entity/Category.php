@@ -34,6 +34,11 @@ class Category
      */
     private $slug;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Language", inversedBy="categories")
+     */
+    private $language;
+
     public function __construct()
     {
         $this->BlogPost = new ArrayCollection();
@@ -96,6 +101,18 @@ class Category
     {
         $slug = UrlService::slug($slug);
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getLanguage(): ?Language
+    {
+        return $this->language;
+    }
+
+    public function setLanguage(?Language $language): self
+    {
+        $this->language = $language;
 
         return $this;
     }

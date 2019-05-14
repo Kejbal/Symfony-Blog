@@ -2,6 +2,7 @@
 
 namespace App\Tests\Admin;
 
+use App\Entity\Category;
 use App\Entity\Language;
 use PHPUnit\Framework\TestCase;
 
@@ -23,6 +24,12 @@ class LangaugeTest extends TestCase
 
         $language->setStatus(1);
         $this->assertEquals(1, $language->getStatus());
+
+        $category = new Category;
+        $language->addCategory($category);
+        $this->assertNotEmpty($language->getCategories());
+        $language->removeCategory($category);
+        $this->assertEmpty($language->getCategories());
 
     }
 }

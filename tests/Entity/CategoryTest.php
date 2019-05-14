@@ -4,6 +4,7 @@ namespace App\Tests\Admin;
 
 use App\Entity\BlogPost;
 use App\Entity\Category;
+use App\Entity\Language;
 use PHPUnit\Framework\TestCase;
 
 class CategoryTest extends TestCase
@@ -21,6 +22,10 @@ class CategoryTest extends TestCase
 
         $category->setSlug('Ah#l4 p!Ein');
         $this->assertEquals('ah-l4-p-ein', $category->getSlug());
+
+        $language = new Language;
+        $category->setLanguage($language);
+        $this->assertEquals($language, $category->getLanguage($language));
 
         $post = new BlogPost();
 
