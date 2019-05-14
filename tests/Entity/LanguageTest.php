@@ -2,6 +2,7 @@
 
 namespace App\Tests\Admin;
 
+use App\Entity\BlogPost;
 use App\Entity\Category;
 use App\Entity\Language;
 use PHPUnit\Framework\TestCase;
@@ -30,6 +31,12 @@ class LangaugeTest extends TestCase
         $this->assertNotEmpty($language->getCategories());
         $language->removeCategory($category);
         $this->assertEmpty($language->getCategories());
+
+        $post = new BlogPost;
+        $language->addBlogPost($post);
+        $this->assertNotEmpty($language->getBlogPosts());
+        $language->removeBlogPost($post);
+        $this->assertEmpty($language->getBlogPosts());
 
     }
 }

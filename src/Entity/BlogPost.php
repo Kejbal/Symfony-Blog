@@ -53,6 +53,11 @@ class BlogPost
      */
     private $slug;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Language", inversedBy="blogPosts")
+     */
+    private $language;
+
     public function __construct()
     {
         $this->date = new \DateTime();
@@ -144,6 +149,18 @@ class BlogPost
     {
         $slug = UrlService::slug($slug);
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getLanguage(): ?Language
+    {
+        return $this->language;
+    }
+
+    public function setLanguage(?Language $language): self
+    {
+        $this->language = $language;
 
         return $this;
     }

@@ -3,6 +3,7 @@
 namespace App\Admin;
 
 use App\Entity\Category;
+use App\Entity\Language;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -31,8 +32,12 @@ class BlogPostAdmin extends AbstractAdmin
                 'choices' => array(
                     'Yes' => true,
                     'No' => false,
-                )))
-        ;
+                )))->add('language', EntityType::class, [
+            'class' => Language::class,
+            'choice_label' => 'name',
+            'required' => false,
+            'placeholder' => 'Please select entity',
+        ]);
 
         if (!$this->isCurrentRoute('create')) {
             $formMapper->add('date', DateTimeType::class);
@@ -44,6 +49,7 @@ class BlogPostAdmin extends AbstractAdmin
     {
         $datagridMapper->add('title');
         $datagridMapper->add('category.name');
+        $datagridMapper->add('language');
 
     }
 
@@ -51,6 +57,7 @@ class BlogPostAdmin extends AbstractAdmin
     {
         $listMapper->addIdentifier('title');
         $listMapper->add('category.name');
+        $listMapper->add('language');
 
     }
 }

@@ -34,6 +34,11 @@ class BlogPostAdminTest extends BaseWeb
                 $crawler->filter('th:contains("Title")')->count()
             );
 
+            $this->assertGreaterThan(
+                0,
+                $crawler->filter('th:contains("Language")')->count()
+            );
+
         }
 
         $this->assertGreaterThan(
@@ -44,6 +49,11 @@ class BlogPostAdminTest extends BaseWeb
         $this->assertGreaterThan(
             0,
             $crawler->filter('a.sonata-toggle-filter:contains("Category Name")')->count()
+        );
+
+        $this->assertGreaterThan(
+            0,
+            $crawler->filter('a.sonata-toggle-filter:contains("Language")')->count()
         );
 
     }
@@ -68,6 +78,7 @@ class BlogPostAdminTest extends BaseWeb
             's5d37a1acbf[body]' => '<div>test</div>',
             's5d37a1acbf[category]' => $category_id,
             's5d37a1acbf[draft]' => true,
+            's5d37a1acbf[language]' => '1',
         ));
         $crawler = $this->client->submit($form);
 
@@ -91,6 +102,7 @@ class BlogPostAdminTest extends BaseWeb
             's5d37a1acbf[date][date][year]' => 2018,
             's5d37a1acbf[date][time][hour]' => 2,
             's5d37a1acbf[date][time][minute]' => 55,
+            's5d37a1acbf[language]' => '1',
         ));
         $crawler = $this->client->submit($form);
 

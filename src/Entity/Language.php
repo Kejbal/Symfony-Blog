@@ -38,9 +38,15 @@ class Language
      */
     private $categories;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\BlogPost", mappedBy="language")
+     */
+    private $blogPosts;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->blogPosts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -118,6 +124,37 @@ class Language
     public function __toString()
     {
         return (string) $this->getName();
+    }
+
+    /**
+     * @return Collection|BlogPost[]
+     */
+    public function getBlogPosts(): Collection
+    {
+        return $this->blogPosts;
+    }
+
+    public function addBlogPost(BlogPost $blogPost): self
+    {
+        if (!$this->blogPosts->contains($blogPost)) {
+            $this->blogPosts[] = $blogPost;
+            $blogPost->setLanguage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBlogPost(BlogPost $blogPost): self
+    {
+        if ($this->blogPosts->contains($blogPost)) {
+            $this->blogPosts->removeElement($blogPost);
+            // set the owning side to null (unless already changed)
+            if ($blogPost->getLanguage() === $this) {
+                $blogPost->setLanguage(null);
+            }
+        }
+
+        return $this;
     }
 
 }

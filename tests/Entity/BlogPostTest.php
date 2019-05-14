@@ -4,6 +4,7 @@ namespace App\Tests\Admin;
 
 use App\Entity\BlogPost;
 use App\Entity\Category;
+use App\Entity\Language;
 use PHPUnit\Framework\TestCase;
 
 class BlogPostTest extends TestCase
@@ -39,6 +40,10 @@ class BlogPostTest extends TestCase
         $date = new \DateTime('2018-05-10 12:57:12');
         $post->setDate($date);
         $this->assertEquals($date, $post->getDate());
+
+        $language = new Language;
+        $post->setLanguage($language);
+        $this->assertEquals($language, $post->getLanguage($language));
 
     }
 }
