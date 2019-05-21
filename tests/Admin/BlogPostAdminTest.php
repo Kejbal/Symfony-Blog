@@ -60,7 +60,6 @@ class BlogPostAdminTest extends BaseWeb
 
     public function AddEdit()
     {
-
         $category = self::$container->get('doctrine')->getRepository(Category::class)->findOneBy(array());
         $category_id = $category->getId();
 
@@ -82,14 +81,15 @@ class BlogPostAdminTest extends BaseWeb
         ));
         $crawler = $this->client->submit($form);
 
-        $post = self::$container->get('doctrine')->getRepository(BlogPost::class)->findOneBy(array('title' => 'Meik8ree', 'category' => $category_id));
+        $post = self::$container->get('doctrine')->getRepository(BlogPost::class)->findOneBy(array('title' => 'Meik8ree', 'category' => $category_id, 'subtitle'=>'uT6eSh9h', 'language'=>'1'));
+        
         $this->assertTrue(!empty($post));
 
         $this->assertTrue($crawler->filter('html:contains("Redirecting to")')->count() > 0);
 
         $link = $crawler->filter('a')->attr('href');
         $crawler = $this->client->request('GET', $link);
-
+        
         $send_button = $crawler->selectButton('Update');
         $form = $send_button->form(array(
             's5d37a1acbf[title]' => 'Aaphoo9k',
@@ -102,11 +102,11 @@ class BlogPostAdminTest extends BaseWeb
             's5d37a1acbf[date][date][year]' => 2018,
             's5d37a1acbf[date][time][hour]' => 2,
             's5d37a1acbf[date][time][minute]' => 55,
-            's5d37a1acbf[language]' => '1',
+            's5d37a1acbf[language]' => '2',
         ));
         $crawler = $this->client->submit($form);
-
-        $post = self::$container->get('doctrine')->getRepository(BlogPost::class)->findOneBy(array('title' => 'Aaphoo9k', 'category' => $category_id));
+        
+        $post = self::$container->get('doctrine')->getRepository(BlogPost::class)->findOneBy(array('title' => 'Aaphoo9k', 'category' => $category_id, 'subtitle'=>'wepuL4qu', 'language'=>'2'));
         $this->assertTrue(!empty($post));
 
         $this->assertTrue($crawler->filter('html:contains("Redirecting to")')->count() > 0);

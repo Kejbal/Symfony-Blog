@@ -26,25 +26,21 @@ class CategorySlugListener implements EventSubscriber
 
         $entity->setSlug($entity->getName());
 
-        $i=0;
+        $i = 0;
         do {
-            if ($entity->getId()) {
-                $category_row=$em->createQuery('SELECT c FROM App:Category c WHERE c.slug=:slug AND  c.id!=:id ORDER BY c.name ASC')->setParameter('slug', $entity->getSlug())->setParameter('id', $entity->getId())
+
+            $category_row = $em->createQuery('SELECT c FROM App:Category c WHERE c.slug=:slug ORDER BY c.name ASC')->setParameter('slug', $entity->getSlug())
                 ->getResult();
-            } else {
-                $category_row=$em->createQuery('SELECT c FROM App:Category c WHERE c.slug=:slug ORDER BY c.name ASC')->setParameter('slug', $entity->getSlug())
-                ->getResult();
-            }
 
             if (empty($category_row)) {
                 break;
             }
 
-            $entity->setSlug($entity->getName().'-'.$i);
+            $entity->setSlug($entity->getName() . '-' . $i);
 
             $i++;
 
-        } while(!empty($category_row));
+        } while (!empty($category_row));
 
     }
 
@@ -61,25 +57,21 @@ class CategorySlugListener implements EventSubscriber
         // necessary to force the update to see the change
         $em = $args->getEntityManager();
 
-        $i=0;
+        $i = 0;
         do {
-            if ($entity->getId()) {
-                $category_row=$em->createQuery('SELECT c FROM App:Category c WHERE c.slug=:slug AND  c.id!=:id ORDER BY c.name ASC')->setParameter('slug', $entity->getSlug())->setParameter('id', $entity->getId())
+
+            $category_row = $em->createQuery('SELECT c FROM App:Category c WHERE c.slug=:slug ORDER BY c.name ASC')->setParameter('slug', $entity->getSlug())
                 ->getResult();
-            } else {
-                $category_row=$em->createQuery('SELECT c FROM App:Category c WHERE c.slug=:slug ORDER BY c.name ASC')->setParameter('slug', $entity->getSlug())
-                ->getResult();
-            }
 
             if (empty($category_row)) {
                 break;
             }
 
-            $entity->setSlug($entity->getName().'-'.$i);
+            $entity->setSlug($entity->getName() . '-' . $i);
 
             $i++;
 
-        } while(0);
+        } while (0);
 
         $meta = $em->getClassMetadata(get_class($entity));
         $em->getUnitOfWork()->recomputeSingleEntityChangeSet($meta, $entity);

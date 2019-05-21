@@ -26,25 +26,20 @@ class BlogPostSlugListener implements EventSubscriber
 
         $entity->setSlug($entity->getTitle());
 
-        $i=0;
+        $i = 0;
         do {
-            if ($entity->getId()) {
-                $post_row=$em->createQuery('SELECT bp FROM App:BlogPost bp WHERE bp.slug=:slug AND  bp.id!=:id ORDER BY bp.id ASC')->setParameter('slug', $entity->getSlug())->setParameter('id', $entity->getId())
+            $post_row = $em->createQuery('SELECT bp FROM App:BlogPost bp WHERE bp.slug=:slug ORDER BY bp.id ASC')->setParameter('slug', $entity->getSlug())
                 ->getResult();
-            } else {
-                $post_row=$em->createQuery('SELECT bp FROM App:BlogPost bp WHERE bp.slug=:slug ORDER BY bp.id ASC')->setParameter('slug', $entity->getSlug())
-                ->getResult();
-            }
 
             if (empty($post_row)) {
                 break;
             }
 
-            $entity->setSlug($entity->getTitle().'-'.$i);
+            $entity->setSlug($entity->getTitle() . '-' . $i);
 
             $i++;
 
-        } while(!empty($post_row));
+        } while (!empty($post_row));
 
     }
 
@@ -61,25 +56,21 @@ class BlogPostSlugListener implements EventSubscriber
         // necessary to force the update to see the change
         $em = $args->getEntityManager();
 
-        $i=0;
+        $i = 0;
         do {
-            if ($entity->getId()) {
-                $post_row=$em->createQuery('SELECT bp FROM App:BlogPost bp WHERE bp.slug=:slug AND  bp.id!=:id ORDER BY bp.id ASC')->setParameter('slug', $entity->getSlug())->setParameter('id', $entity->getId())
+
+            $post_row = $em->createQuery('SELECT bp FROM App:BlogPost bp WHERE bp.slug=:slug ORDER BY bp.id ASC')->setParameter('slug', $entity->getSlug())
                 ->getResult();
-            } else {
-                $post_row=$em->createQuery('SELECT bp FROM App:BlogPost bp WHERE bp.slug=:slug ORDER BY bp.id ASC')->setParameter('slug', $entity->getSlug())
-                ->getResult();
-            }
 
             if (empty($post_row)) {
                 break;
             }
 
-            $entity->setSlug($entity->getTitle().'-'.$i);
+            $entity->setSlug($entity->getTitle() . '-' . $i);
 
             $i++;
 
-        } while(0);
+        } while (1);
 
         $meta = $em->getClassMetadata(get_class($entity));
         $em->getUnitOfWork()->recomputeSingleEntityChangeSet($meta, $entity);

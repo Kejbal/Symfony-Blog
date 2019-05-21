@@ -55,13 +55,13 @@ class CategoryAdminTest extends BaseWeb
         $send_button = $crawler->selectButton('Create');
 
         $form = $send_button->form(array(
-            'sec4809de79[name]' => 'Test',
+            'sec4809de79[name]' => 'Tessfdt',
             'sec4809de79[language]' => '1',
         ));
 
         $crawler = $this->client->submit($form);
 
-        $category = self::$container->get('doctrine')->getRepository(Category::class)->findOneBy(array('name' => 'Test'));
+        $category = self::$container->get('doctrine')->getRepository(Category::class)->findOneBy(array('name' => 'Tessfdt', 'language' => '1'));
         $this->assertTrue(!empty($category));
 
         $this->assertTrue($crawler->filter('html:contains("Redirecting to")')->count() > 0);
@@ -79,7 +79,7 @@ class CategoryAdminTest extends BaseWeb
 
         $crawler = $this->client->submit($form);
 
-        $category = self::$container->get('doctrine')->getRepository(Category::class)->findOneBy(array('name' => 'Hu4thahr'));
+        $category = self::$container->get('doctrine')->getRepository(Category::class)->findOneBy(array('name' => 'Hu4thahr', 'language' => '2'));
         $this->assertTrue(!empty($category));
 
         $blogPostTest = new BlogPostAdminTest();
