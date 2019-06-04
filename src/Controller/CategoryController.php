@@ -8,15 +8,15 @@ use App\Repository\CategoryRepository;
 use App\Service\UrlService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CategoryController extends ControllerBase
 {
     /**
      * @Route("/category", name="category")
      */
-    public function index(Request $request, CategoryRepository $category, BlogPostRepository $blog_post)
+    public function index(Request $request, CategoryRepository $category, BlogPostRepository $blog_post, TranslatorInterface $translator)
     {
-
         $slug = $request->attributes->get('slug');
         $page = $request->attributes->get('page');
 

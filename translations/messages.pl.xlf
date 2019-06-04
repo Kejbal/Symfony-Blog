@@ -9,6 +9,18 @@
                 <source>Contact</source>
                 <target>Kontakt</target>
             </trans-unit>
+            <trans-unit id="newer_posts">
+                <source>Newer Posts</source>
+                <target>Nowsze Wpisy</target>
+            </trans-unit>
+            <trans-unit id="older_posts">
+                <source>Older Posts</source>
+                <target>Starsze Wpisy</target>
+            </trans-unit>
+            <trans-unit id="sorry_no_post_on_this_url">
+                <source>Sorry no Post on this url</source>
+                <target>Przepraszamy ale nia ma wpisu pod tym adresem</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

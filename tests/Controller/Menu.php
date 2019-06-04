@@ -15,6 +15,7 @@ class Menu extends WebTestCase
         $locale = $client->getRequest()->getLocale();
 
         if ($locale === 'en') {
+
             $this->assertGreaterThan(
                 0,
                 $crawler->filter('.nav-link:contains("Home")')->count()
@@ -68,18 +69,32 @@ class Menu extends WebTestCase
                 $manu_links[] = $category;
             }
         }
+        if ($locale === 'en') {
+            foreach ($manu_links as $manu_link) {
 
-        foreach ($manu_links as $manu_link) {
+                $this->assertGreaterThan(
+                    0,
+                    $crawler->filter('.nav-link:contains("' . $manu_link->getName() . '")')->count()
+                );
 
-            $this->assertGreaterThan(
-                0,
-                $crawler->filter('.nav-link:contains("' . $manu_link->getName() . '")')->count()
-            );
+                $this->assertEquals(
+                    'http://localhost/category/' . $manu_link->getSlug(),
+                    $crawler->filter('.nav-link:contains("' . $manu_link->getName() . '")')->attr('href')
+                );
+            }
+        } else {
+            foreach ($manu_links as $manu_link) {
 
-            $this->assertEquals(
-                '/category/' . $manu_link->getSlug(),
-                $crawler->filter('.nav-link:contains("' . $manu_link->getName() . '")')->attr('href')
-            );
+                $this->assertGreaterThan(
+                    0,
+                    $crawler->filter('.nav-link:contains("' . $manu_link->getName() . '")')->count()
+                );
+
+                $this->assertEquals(
+                    'http://localhost/kategoria/' . $manu_link->getSlug(),
+                    $crawler->filter('.nav-link:contains("' . $manu_link->getName() . '")')->attr('href')
+                );
+            }
         }
 
     }

@@ -10,7 +10,7 @@
                 <div class="col-lg-8 col-md-10 mx-auto">
                     <div class="post-heading">
                         {% if post.id is empty %}
-                            <h1>Sorry no Post on this url</h1>
+                            <h1>{% trans %}Sorry no Post on this url{% endtrans %}</h1>
                         {% else %}
                             <h1>
                                 {{ post.getTitle() }}</h1>
