@@ -20,6 +20,8 @@ class CategoryController extends ControllerBase
         $slug = $request->attributes->get('slug');
         $page = $request->attributes->get('page');
 
+        $locale = $request->getLocale();
+
         if (empty($slug)) {
             $slug = 0;
         }

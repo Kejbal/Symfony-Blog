@@ -4,6 +4,7 @@ namespace App\Tests\Controller;
 
 use App\Entity\BlogPost;
 use App\Entity\Category;
+use App\Entity\Language;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class Menu extends WebTestCase
@@ -60,8 +61,9 @@ class Menu extends WebTestCase
 
         }
 
-        $categories = self::$container->get('doctrine')->getRepository(Category::class)->findBy(array());
+        $language = self::$container->get('doctrine')->getRepository(Language::class)->findOneBy(array('iso_code' => $locale));
 
+        $categories = self::$container->get('doctrine')->getRepository(Category::class)->findBy(array('language' => [$language->getId(), null]));
         foreach ($categories as $category) {
             $post = self::$container->get('doctrine')->getRepository(BlogPost::class)->findOneBy(array('category' => $category->getId()));
 
