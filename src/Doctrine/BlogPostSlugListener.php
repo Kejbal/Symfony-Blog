@@ -28,10 +28,10 @@ class BlogPostSlugListener implements EventSubscriber
 
         $i = 0;
         do {
-            $post_row = $em->createQuery('SELECT bp FROM App:BlogPost bp WHERE bp.slug=:slug ORDER BY bp.id ASC')->setParameter('slug', $entity->getSlug())
+            $postRow = $em->createQuery('SELECT bp FROM App:BlogPost bp WHERE bp.slug=:slug ORDER BY bp.id ASC')->setParameter('slug', $entity->getSlug())
                 ->getResult();
 
-            if (empty($post_row)) {
+            if (empty($postRow)) {
                 break;
             }
 
@@ -39,7 +39,7 @@ class BlogPostSlugListener implements EventSubscriber
 
             $i++;
 
-        } while (!empty($post_row));
+        } while (!empty($postRow));
 
     }
 
@@ -59,10 +59,10 @@ class BlogPostSlugListener implements EventSubscriber
         $i = 0;
         do {
 
-            $post_row = $em->createQuery('SELECT bp FROM App:BlogPost bp WHERE bp.slug=:slug ORDER BY bp.id ASC')->setParameter('slug', $entity->getSlug())
+            $postRow = $em->createQuery('SELECT bp FROM App:BlogPost bp WHERE bp.slug=:slug ORDER BY bp.id ASC')->setParameter('slug', $entity->getSlug())
                 ->getResult();
 
-            if (empty($post_row)) {
+            if (empty($postRow)) {
                 break;
             }
 

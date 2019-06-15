@@ -16,7 +16,7 @@ class CategoryController extends ControllerBase
     /**
      * @Route("/category", name="category")
      */
-    public function index(Request $request, LanguageRepository $language, CategoryRepository $category, BlogPostRepository $blog_post, TranslatorInterface $translator)
+    public function index(Request $request, LanguageRepository $language, CategoryRepository $category, BlogPostRepository $blogPost, TranslatorInterface $translator)
     {
         $slug = $request->attributes->get('slug');
         $page = $request->attributes->get('page');
@@ -30,54 +30,53 @@ class CategoryController extends ControllerBase
         }
 
         if (is_numeric($slug)) {
-            $category_id = (int) $slug;
-            if ($category_id > 0) {
-                $category_row = $category->findOneBy(['category_id' => $category_id]);
+            $categeryId = (int) $slug;
+            if ($categeryId > 0) {
+                $categoryRow = $category->findOneBy(['category_id' => $categeryId]);
             } else {
-                $category_row = new Category;
+                $categoryRow = new Category;
             }
         } else {
             $slug = UrlService::slug($slug);
-            $category_row = $category->findOneBy(['slug' => $slug]);
-            $category_id = $category_row->getId();
+            $categoryRow = $category->findOneBy(['slug' => $slug]);
+            $categeryId = $categoryRow->getId();
         }
 
         $limit = 5;
-        $show_button_older = false;
-        $show_button_newer = false;
+        $showButtonOlder = false;
+        $showButtonNewer = false;
 
         if ($page > 1) {
-            $limit_offset = ($page - 1) * $limit;
-            $show_button_newer = true;
+            $limitOffset = ($page - 1) * $limit;
+            $showButtonNewer = true;
         } else {
-            $limit_offset = 0;
+            $limitOffset = 0;
             $page = 1;
         }
 
-        if ($category_id === 0) {
+        if ($categeryId === 0) {
 
-            $posts = $blog_post->findBy(['draft' => '0', 'language' => [$language->getId(), null]], ['id' => 'DESC'], $limit, $limit_offset);
-            $all_posts = $blog_post->findBy(['draft' => '0']);
+            $posts = $blogPost->findBy(['draft' => '0', 'language' => [$language->getId(), null]], ['id' => 'DESC'], $limit, $limitOffset);
+            $allPosts = $blogPost->findBy(['draft' => '0']);
 
         } else {
-            $posts = $blog_post->findBy(['draft' => '0', 'language' => [$language->getId(), null], 'category' => $category_id], ['id' => 'DESC'], $limit, $limit_offset);
-            $all_posts = $blog_post->findBy(['draft' => '0', 'language' => [$language->getId(), null], 'category' => $category_id]);
+            $posts = $blogPost->findBy(['draft' => '0', 'language' => [$language->getId(), null], 'category' => $categeryId], ['id' => 'DESC'], $limit, $limitOffset);
+            $allPosts = $blogPost->findBy(['draft' => '0', 'language' => [$language->getId(), null], 'category' => $categeryId]);
         }
 
-        if (count($all_posts) > $limit * $page) {
-            $show_button_older = true;
+        if (count($allPosts) > $limit * $page) {
+            $showButtonOlder = true;
         }
 
-        $currentCategory=($category_row->getSlug() ? $category_row->getSlug() : $category_row->getId());
+        $currentCategory=($categoryRow->getSlug() ? $categoryRow->getSlug() : $categoryRow->getId());
 
-        $this->_dataView['controller_name'] = 'IndexController';
         $this->_dataView['posts'] = $posts;
-        $this->_dataView['show_button_older'] = $show_button_older;
-        $this->_dataView['show_button_newer'] = $show_button_newer;
-        $this->_dataView['current_page'] = $page;
-        $this->_dataView['current_category'] = ($currentCategory?$currentCategory:0);
+        $this->_dataView['showButtonOlder'] = $showButtonOlder;
+        $this->_dataView['showButtonNewer'] = $showButtonNewer;
+        $this->_dataView['currentPage'] = $page;
+        $this->_dataView['currentCategory'] = ($currentCategory?$currentCategory:0);
 
-        $this->_dataView['controller_name'] = 'CategoryController';
+        $this->_dataView['controllerName'] = 'CategoryController';
         return $this->render('category/index.html.twig', $this->_dataView);
     }
 }

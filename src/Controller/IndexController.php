@@ -11,33 +11,33 @@ class IndexController extends ControllerBase
     /**
      * @Route("/index", name="index")
      */
-    public function index(Request $request, BlogPostRepository $blog_post)
+    public function index(Request $request, BlogPostRepository $blogPost)
     {
         $page = (int) $request->attributes->get('page');
         $limit = 5;
-        $show_button_older = false;
-        $show_button_newer = false;
+        $showButtonOlder = false;
+        $showButtonNewer = false;
 
         if ($page > 1) {
-            $limit_offset = ($page - 1) * $limit;
-            $show_button_newer = true;
+            $limitOffset = ($page - 1) * $limit;
+            $showButtonNewer = true;
         } else {
-            $limit_offset = 0;
+            $limitOffset = 0;
             $page = 1;
         }
 
-        $posts = $blog_post->findBy(['draft' => '0'], ['id' => 'DESC'], $limit, $limit_offset);
+        $posts = $blogPost->findBy(['draft' => '0'], ['id' => 'DESC'], $limit, $limitOffset);
 
-        $all_posts = $blog_post->findBy(['draft' => '0']);
-        if (count($all_posts) > $limit * $page) {
-            $show_button_older = true;
+        $allPosts = $blogPost->findBy(['draft' => '0']);
+        if (count($allPosts) > $limit * $page) {
+            $showButtonOlder = true;
         }
 
-        $this->_dataView['controller_name'] = 'IndexController';
+        $this->_dataView['controllerName'] = 'IndexController';
         $this->_dataView['posts'] = $posts;
-        $this->_dataView['show_button_older'] = $show_button_older;
-        $this->_dataView['show_button_newer'] = $show_button_newer;
-        $this->_dataView['current_page'] = $page;
+        $this->_dataView['showButtonOlder'] = $showButtonOlder;
+        $this->_dataView['showButtonNewer'] = $showButtonNewer;
+        $this->_dataView['currentPage'] = $page;
         return $this->render('index/index.html.twig', $this->_dataView);
     }
 }

@@ -29,10 +29,10 @@ class CategorySlugListener implements EventSubscriber
         $i = 0;
         do {
 
-            $category_row = $em->createQuery('SELECT c FROM App:Category c WHERE c.slug=:slug ORDER BY c.name ASC')->setParameter('slug', $entity->getSlug())
+            $categoryRow = $em->createQuery('SELECT c FROM App:Category c WHERE c.slug=:slug ORDER BY c.name ASC')->setParameter('slug', $entity->getSlug())
                 ->getResult();
 
-            if (empty($category_row)) {
+            if (empty($categoryRow)) {
                 break;
             }
 
@@ -40,7 +40,7 @@ class CategorySlugListener implements EventSubscriber
 
             $i++;
 
-        } while (!empty($category_row));
+        } while (!empty($categoryRow));
 
     }
 
@@ -60,10 +60,10 @@ class CategorySlugListener implements EventSubscriber
         $i = 0;
         do {
 
-            $category_row = $em->createQuery('SELECT c FROM App:Category c WHERE c.slug=:slug ORDER BY c.name ASC')->setParameter('slug', $entity->getSlug())
+            $categoryRow = $em->createQuery('SELECT c FROM App:Category c WHERE c.slug=:slug ORDER BY c.name ASC')->setParameter('slug', $entity->getSlug())
                 ->getResult();
 
-            if (empty($category_row)) {
+            if (empty($categoryRow)) {
                 break;
             }
 

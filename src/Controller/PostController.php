@@ -13,7 +13,7 @@ class PostController extends ControllerBase
     /**
      * @Route("/post", name="post")
      */
-    public function index(Request $request, BlogPostRepository $blog_post)
+    public function index(Request $request, BlogPostRepository $blogPost)
     {
 
         $slug = $request->attributes->get('slug');
@@ -25,17 +25,17 @@ class PostController extends ControllerBase
         if (is_numeric($slug)) {
             $post_id = (int) $slug;
             if ($post_id > 0) {
-                $post = $blog_post->findOneBy(['id' => $slug]);
+                $post = $blogPost->findOneBy(['id' => $slug]);
             } else {
                 $post = new BlogPost;
             }
         } elseif (!empty($slug)) {
             $slug = UrlService::slug($slug);
-            $post = $blog_post->findOneBy(['slug' => $slug]);
+            $post = $blogPost->findOneBy(['slug' => $slug]);
         }
 
         $this->_dataView['post'] = $post;
-        $this->_dataView['controller_name'] = 'PostController';
+        $this->_dataView['controllerName'] = 'PostController';
         return $this->render('post/index.html.twig', $this->_dataView);
     }
 }

@@ -42,7 +42,7 @@ class ContactController extends ControllerBase
             }
         }
 
-        $this->_dataView['controller_name'] = 'ContactController';
+        $this->_dataView['controllerName'] = 'ContactController';
         return $this->render('contact/index.html.twig', $this->_dataView);
     }
 
@@ -69,7 +69,7 @@ class ContactController extends ControllerBase
         $errors = [];
         $result = $mailer->send($message, $errors);
 
-        $this->_dataView['controller_name'] = 'ContactController';
+        $this->_dataView['controllerName'] = 'ContactController';
         return $this->render('contact/index.html.twig', $this->_dataView);
     }
 }

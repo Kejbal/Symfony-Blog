@@ -23,17 +23,17 @@
                 {% endfor %}
                 <div class="row">
                     <div class="col-md-6">
-                        {% if show_button_newer %}
+                        {% if showButtonNewer %}
                             <div class="clearfix" id="newer-posts">
-                                <a class="btn btn-primary float-left" href="/{{current_page-1}}">&larr; Newer Posts
+                                <a class="btn btn-primary float-left" href="/{{currentPage-1}}">&larr; Newer Posts
                                 </a>
                             </div>
                         {% endif %}
                     </div>
                     <div class="col-md-6">
-                        {% if show_button_older %}
+                        {% if showButtonOlder %}
                             <div class="clearfix" id="older-posts">
-                                <a class="btn btn-primary float-right" href="/{{current_page+1}}">Older Posts &rarr;</a>
+                                <a class="btn btn-primary float-right" href="/{{currentPage+1}}">Older Posts &rarr;</a>
                             </div>
                         {% endif %}
                     </div>
