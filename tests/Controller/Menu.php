@@ -19,7 +19,17 @@ class Menu extends WebTestCase
 
         $locale = $client->getRequest()->getLocale();
 
+        $this->assertGreaterThan(
+            0,
+            $crawler->filter('a.navbar-brand:contains("Kejbal")')->count()
+        );
+
         if ($locale === 'en') {
+
+            $this->assertEquals(
+                'http://localhost/',
+                $crawler->filter('a.navbar-brand:contains("Kejbal")')->attr('href')
+            );
 
             $this->assertGreaterThan(
                 0,
@@ -42,6 +52,11 @@ class Menu extends WebTestCase
             );
 
         } elseif ($locale === 'pl') {
+
+            $this->assertEquals(
+                'http://localhost/pl',
+                $crawler->filter('a.navbar-brand:contains("Kejbal")')->attr('href')
+            );
 
             $this->assertGreaterThan(
                 0,
