@@ -12,6 +12,10 @@ class Menu extends WebTestCase
 
     public function Menu($crawler, $client)
     {
+        $this->assertGreaterThan(
+            0,
+            $crawler->filter('select#select-languages')->count()
+        );
 
         $locale = $client->getRequest()->getLocale();
 

@@ -9,14 +9,14 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class ControllerBase extends AbstractController
 {
-    protected $_data_view = [];
+    protected $_dataView = [];
 
-    public function __construct(CategoryRepository $categories, BlogPostRepository $blogPost, LanguageRepository $language, RequestStack $requestStack)
+    public function __construct(CategoryRepository $categories, BlogPostRepository $blogPost, LanguageRepository $languages, RequestStack $requestStack)
     {
 
         $request = $requestStack->getCurrentRequest();
         $locale = $request->getLocale();
-        $language = $language->findOneBy(array('iso_code' => $locale));
+        $language = $languages->findOneBy(array('iso_code' => $locale));
 
         $links = array();
         $categories = $categories->findBy(array('language' => [$language->getId(), null]));
@@ -28,7 +28,9 @@ class ControllerBase extends AbstractController
             }
         }
 
-        $this->_data_view['links'] = $links;
+        $this->_dataView['links'] = $links;
+        $this->_dataView['languages'] = $languages->findBy(array('status' => 1));
+        $this->_dataView['languageIsoCode'] = $language->getIsoCode();
 
     }
 

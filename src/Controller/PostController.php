@@ -34,8 +34,8 @@ class PostController extends ControllerBase
             $post = $blog_post->findOneBy(['slug' => $slug]);
         }
 
-        $this->_data_view['post'] = $post;
-        $this->_data_view['controller_name'] = 'PostController';
-        return $this->render('post/index.html.twig', $this->_data_view);
+        $this->_dataView['post'] = $post;
+        $this->_dataView['controller_name'] = 'PostController';
+        return $this->render('post/index.html.twig', $this->_dataView);
     }
 }

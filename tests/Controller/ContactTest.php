@@ -10,7 +10,7 @@ class ContactTest extends BaseWeb
         $crawler = $this->_client->request('GET', '/contact');
         $this->assertEquals(1, $crawler->filter('.page-heading h1:contains("Contact Me")')->count());
 
-        $this->assertEquals(1, $crawler->filter('form')->count());
+        $this->assertEquals(2, $crawler->filter('form')->count());
 
         $this->assertEquals(1, $crawler->filter('input[type=text]#name')->count());
         $this->assertEquals(1, $crawler->filter('input[type=email]#email')->count());

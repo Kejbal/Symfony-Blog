@@ -42,8 +42,8 @@ class ContactController extends ControllerBase
             }
         }
 
-        $this->_data_view['controller_name'] = 'ContactController';
-        return $this->render('contact/index.html.twig', $this->_data_view);
+        $this->_dataView['controller_name'] = 'ContactController';
+        return $this->render('contact/index.html.twig', $this->_dataView);
     }
 
     public function mail(\Swift_Mailer $mailer)
@@ -69,7 +69,7 @@ class ContactController extends ControllerBase
         $errors = [];
         $result = $mailer->send($message, $errors);
 
-        $this->_data_view['controller_name'] = 'ContactController';
-        return $this->render('contact/index.html.twig', $this->_data_view);
+        $this->_dataView['controller_name'] = 'ContactController';
+        return $this->render('contact/index.html.twig', $this->_dataView);
     }
 }

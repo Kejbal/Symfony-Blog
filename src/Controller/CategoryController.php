@@ -65,14 +65,14 @@ class CategoryController extends ControllerBase
             $show_button_older = true;
         }
 
-        $this->_data_view['controller_name'] = 'IndexController';
-        $this->_data_view['posts'] = $posts;
-        $this->_data_view['show_button_older'] = $show_button_older;
-        $this->_data_view['show_button_newer'] = $show_button_newer;
-        $this->_data_view['current_page'] = $page;
-        $this->_data_view['current_category'] = ($category_row->getSlug() ? $category_row->getSlug() : $category_row->getId());
+        $this->_dataView['controller_name'] = 'IndexController';
+        $this->_dataView['posts'] = $posts;
+        $this->_dataView['show_button_older'] = $show_button_older;
+        $this->_dataView['show_button_newer'] = $show_button_newer;
+        $this->_dataView['current_page'] = $page;
+        $this->_dataView['current_category'] = ($category_row->getSlug() ? $category_row->getSlug() : $category_row->getId());
 
-        $this->_data_view['controller_name'] = 'CategoryController';
-        return $this->render('category/index.html.twig', $this->_data_view);
+        $this->_dataView['controller_name'] = 'CategoryController';
+        return $this->render('category/index.html.twig', $this->_dataView);
     }
 }
