@@ -19,7 +19,7 @@ class CategoryTest extends BaseWeb
             $categories = self::$container->get('doctrine')->getRepository(Category::class)->findBy(['language' => [$language->getId(), null]]);
 
             foreach ($categories as $category) {
-                $all_posts = self::$container->get('doctrine')->getRepository(BlogPost::class)->findBy(['draft' => '0', 'category' => $category->getId()], ['id' => 'DESC']);
+                $all_posts = self::$container->get('doctrine')->getRepository(BlogPost::class)->findBy(['draft' => '0', 'category' => $category->getId(), 'language' => [$language->getId(), null]], ['id' => 'DESC']);
 
                 $number_page = ceil(count($all_posts) / $per_page);
 
@@ -32,7 +32,7 @@ class CategoryTest extends BaseWeb
                             $crawler = $this->_client->request('GET', '/kategoria/' . $category->getSlug() . '/' . $page);
                         }
 
-                        $posts = self::$container->get('doctrine')->getRepository(BlogPost::class)->findBy(['draft' => '0', 'category' => $category->getId()], ['id' => 'DESC'], $per_page, ($page - 1) * $per_page);
+                        $posts = self::$container->get('doctrine')->getRepository(BlogPost::class)->findBy(['draft' => '0', 'category' => $category->getId(), 'language' => [$language->getId(), null]], ['id' => 'DESC'], $per_page, ($page - 1) * $per_page);
 
                         foreach ($posts as $post) {
                             if ($language->getIsoCode()=='en') {
