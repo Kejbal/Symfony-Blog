@@ -29,7 +29,7 @@ class UserFixtures extends Fixture
 
         $user->setRoles(array('ROLE_ADMIN'));
 
-        $user->setStatus('1');
+        $user->setStatus(true);
 
         $manager->persist($user);
 

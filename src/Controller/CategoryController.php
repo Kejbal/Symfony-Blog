@@ -24,6 +24,11 @@ class CategoryController extends ControllerBase
         $locale = $request->getLocale();
         
         $language = $language->findOneBy(array('iso_code' => $locale));
+        if ($language->getId()) {
+            $languageId =$language->getId();  
+        } else {
+            $languageId =0;  
+        }
 
         if (empty($slug)) {
             $slug = 0;
@@ -39,7 +44,12 @@ class CategoryController extends ControllerBase
         } else {
             $slug = UrlService::slug($slug);
             $categoryRow = $category->findOneBy(['slug' => $slug]);
-            $categeryId = $categoryRow->getId();
+            if ($categoryRow) {
+                $categeryId = $categoryRow->getId();
+            } else {
+                $categoryRow = new Category;
+                $categeryId=0;
+            }
         }
 
         $limit = 5;
@@ -56,19 +66,19 @@ class CategoryController extends ControllerBase
 
         if ($categeryId === 0) {
 
-            $posts = $blogPost->findBy(['draft' => '0', 'language' => [$language->getId(), null]], ['id' => 'DESC'], $limit, $limitOffset);
+            $posts = $blogPost->findBy(['draft' => '0', 'language' => [$languageId, null]], ['id' => 'DESC'], $limit, $limitOffset);
             $allPosts = $blogPost->findBy(['draft' => '0']);
 
         } else {
-            $posts = $blogPost->findBy(['draft' => '0', 'language' => [$language->getId(), null], 'category' => $categeryId], ['id' => 'DESC'], $limit, $limitOffset);
-            $allPosts = $blogPost->findBy(['draft' => '0', 'language' => [$language->getId(), null], 'category' => $categeryId]);
+            $posts = $blogPost->findBy(['draft' => '0', 'language' => [$languageId, null], 'category' => $categeryId], ['id' => 'DESC'], $limit, $limitOffset);
+            $allPosts = $blogPost->findBy(['draft' => '0', 'language' => [$languageId, null], 'category' => $categeryId]);
         }
 
         if (count($allPosts) > $limit * $page) {
             $showButtonOlder = true;
         }
-
-        $currentCategory=($categoryRow->getSlug() ? $categoryRow->getSlug() : $categoryRow->getId());
+        
+        $currentCategory=($categoryRow->getSlug() ? $categoryRow->getSlug() :(int) $categoryRow->getId());
 
         $this->_dataView['posts'] = $posts;
         $this->_dataView['showButtonOlder'] = $showButtonOlder;

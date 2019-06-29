@@ -17,6 +17,7 @@ class PostController extends ControllerBase
     {
 
         $slug = $request->attributes->get('slug');
+        $post = new BlogPost;
 
         if (empty($slug)) {
             $slug = 0;
@@ -26,8 +27,6 @@ class PostController extends ControllerBase
             $post_id = (int) $slug;
             if ($post_id > 0) {
                 $post = $blogPost->findOneBy(['id' => $slug]);
-            } else {
-                $post = new BlogPost;
             }
         } elseif (!empty($slug)) {
             $slug = UrlService::slug($slug);

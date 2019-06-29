@@ -44,9 +44,9 @@ class Category
         $this->BlogPost = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
-        return $this->id;
+        return (int) $this->id;
     }
 
     public function getName(): ?string

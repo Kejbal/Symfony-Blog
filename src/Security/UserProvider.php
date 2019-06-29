@@ -3,9 +3,9 @@ namespace App\Security;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 
 final class UserProvider implements UserProviderInterface
 {
@@ -35,7 +35,7 @@ final class UserProvider implements UserProviderInterface
         return $user;
     }
 
-    private function findOneUserBy(array $options): ?User
+    private function findOneUserBy(array $options)
     {
         return $this->entityManager
             ->getRepository(User::class)
