@@ -6,14 +6,20 @@
             {% block title %}Kejbal
             {% endblock %}
         </title>
-        {% block stylesheets %}{% endblock %}
-        <link href="{{app.request.getBaseURL()}}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/><!-- Custom fonts for this template -->
+        {% block stylesheets %}
+            {# 'app' must match the first argument to addEntry() in webpack.config.js #}
+            {{ encore_entry_link_tags('app') }}
+
+            <!-- Renders a link tag (if your module requires any CSS)
+                 <link rel="stylesheet" href="/build/app.css"> -->
+        {% endblock %}
         <link href="{{app.request.getBaseURL() }}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"/>
         <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'/>
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'/>
     <!-- Custom styles for this template -->
         <link href="{{app.request.getBaseURL() }}/css/bootstrap-formhelpers.min.css" rel="stylesheet"/>
-        <link href="{{app.request.getBaseURL() }}/css/clean-blog.min.css" rel="stylesheet"/>
+        <link href="{{app.request.getBaseURL() }}/css/clean-blog.css" rel="stylesheet"/>
+
     </head>
     <body>
     <!-- Navigation -->
