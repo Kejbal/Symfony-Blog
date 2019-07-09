@@ -6,6 +6,10 @@
 parameters:
     locale: 'en'
 
+swiftmailer:
+    url: '%env(MAILER_URL)%'
+    spool: { type: 'memory' }
+
 services:
     # default configuration for services in *this* file
     _defaults:
