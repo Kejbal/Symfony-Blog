@@ -21,6 +21,54 @@
                 <source>Sorry no Post on this url</source>
                 <target>Przepraszamy ale nia ma wpisu pod tym adresem</target>
             </trans-unit>
+            <trans-unit id="contact_me">
+                <source>Contact Me</source>
+                <target>Skontakuj się ze mną</target>
+            </trans-unit>
+            <trans-unit id="have_questions">
+                <source>}Have questions? I have answers.</source>
+                <target>}Masz pytania? Ja mam odpowiedzi.</target>
+            </trans-unit>
+            <trans-unit id="want_to_get_in_touch">
+                <source>Want to get in touch? Fill out the form below to send me a message and I will get back to you as soon as possible!</source>
+                <target>Chcesz się z mną skontaktować? Wypełni formularz poniżej aby wysłać mi wiadomość, a ja skontaktuje się z Tobą najszybciej jak to będzie możliwe!</target>
+            </trans-unit>
+            <trans-unit id="name">
+                <source>Name</source>
+                <target>Imię</target>
+            </trans-unit>
+            <trans-unit id="please_enter_your_name">
+                <source>Please enter your name.</source>
+                <target>Proszę wpisać swoje imię.</target>
+            </trans-unit>
+            <trans-unit id="email_address">
+                <source>Email Address</source>
+                <target>Adres Email</target>
+            </trans-unit>
+            <trans-unit id="please_enter_your_email_address.">
+                <source>Please enter your email address.</source>
+                <target>Proszę wpisać swój adres email.</target>
+            </trans-unit>
+            <trans-unit id="phone_number">
+                <source>Phone Number</source>
+                <target>Numer Telefonu</target>
+            </trans-unit>
+            <trans-unit id="please_enter_your_phone_number">
+                <source>Please enter your phone number.</source>
+                <target>Proszę wpisać swój numer telefonu.</target>
+            </trans-unit>
+            <trans-unit id="message">
+                <source>}Message</source>
+                <target>}Wiadomość</target>
+            </trans-unit>
+            <trans-unit id="please_enter_a_message">
+                <source>Please enter a message.</source>
+                <target>Proszę wpisać wiadomość.</target>
+            </trans-unit>
+            <trans-unit id="send">
+                <source>Send</source>
+                <target>Wyślij</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

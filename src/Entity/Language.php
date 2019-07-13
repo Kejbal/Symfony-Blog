@@ -49,9 +49,9 @@ class Language
         $this->blogPosts = new ArrayCollection();
     }
 
-    public function getId(): int
+    public function getId(): ?int
     {
-        return (int)$this->id;
+        return $this->id;
     }
 
     public function getName(): ?string

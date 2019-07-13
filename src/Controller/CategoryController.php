@@ -24,7 +24,7 @@ class CategoryController extends ControllerBase
         $locale = $request->getLocale();
         
         $language = $language->findOneBy(array('iso_code' => $locale));
-        if ($language->getId()) {
+        if ($language->getId()!== null) {
             $languageId =$language->getId();  
         } else {
             $languageId =0;  

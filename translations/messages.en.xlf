@@ -21,6 +21,54 @@
                 <source>Sorry no Post on this url</source>
                 <target>Sorry no Post on this url</target>
             </trans-unit>
+            <trans-unit id="contact_me">
+                <source>Contact Me</source>
+                <target>Contact Me</target>
+            </trans-unit>
+            <trans-unit id="have_questions">
+                <source>}Have questions? I have answers.</source>
+                <target>}Have questions? I have answers.</target>
+            </trans-unit>
+            <trans-unit id="want_to_get_in_touch">
+                <source>Want to get in touch? Fill out the form below to send me a message and I will get back to you as soon as possible!</source>
+                <target>Want to get in touch? Fill out the form below to send me a message and I will get back to you as soon as possible!</target>
+            </trans-unit>
+            <trans-unit id="name">
+                <source>Name</source>
+                <target>Name</target>
+            </trans-unit>
+            <trans-unit id="please_enter_your_name">
+                <source>Please enter your name.</source>
+                <target>Please enter your name.</target>
+            </trans-unit>
+            <trans-unit id="email_address">
+                <source>Email Address</source>
+                <target>Email Address</target>
+            </trans-unit>
+            <trans-unit id="please_enter_your_email_address.">
+                <source>Please enter your email address.</source>
+                <target>Please enter your email address.</target>
+            </trans-unit>
+            <trans-unit id="phone_number">
+                <source>Phone Number</source>
+                <target>Phone Number</target>
+            </trans-unit>
+            <trans-unit id="please_enter_your_phone_number">
+                <source>Please enter your phone number.</source>
+                <target>Please enter your phone number.</target>
+            </trans-unit>
+            <trans-unit id="message">
+                <source>}Message</source>
+                <target>}Message</target>
+            </trans-unit>
+            <trans-unit id="please_enter_a_message">
+                <source>Please enter a message.</source>
+                <target>Please enter a message.</target>
+            </trans-unit>
+            <trans-unit id="send">
+                <source>Send</source>
+                <target>Send</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
