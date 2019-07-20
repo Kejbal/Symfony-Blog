@@ -8,6 +8,10 @@ use PHPUnit\Framework\TestCase;
 
 class ConfigTest extends TestCase
 {
+    /**
+     * @group entity
+     * @group entity-config
+     */
 
     public function testEntity()
     {

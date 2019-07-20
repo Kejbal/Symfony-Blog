@@ -2,36 +2,42 @@
 
 namespace App\Tests\Entity;
 
+use App\Entity\Config;
 use App\Entity\GroupConfig;
+use Doctrine\Common\Collections\Collection;
 use PHPUnit\Framework\TestCase;
 
 class GroupConfigTest extends TestCase
 {
+    /**
+     * @group entity
+     * @group entity-group-config
+     */
 
     public function testEntity()
     {
 
         $group = new GroupConfig();
 
-        $group->getId();
+        $this->assertNull($group->getId());
 
         $group->setName('Name');
         $this->assertEquals("Name", $group->getName());
+        $this->assertTrue($group->getConfigs() instanceof Collection);
+        $this->assertEmpty($group->getConfigs());
 
-        /* $post = new BlogPost();
+        $config = new Config();
+        $config->setBase('Key');
+        $config->setValue('Value');
+        $group->addConfig($config);
 
-        $post->setTitle('Title');
+        $this->assertTrue($group->getConfigs() instanceof Collection);
+        $this->assertEquals(1, count($group->getConfigs()));
 
-        $post->setBody('<div>Body</div>');
+        $group->removeConfig($config);
 
-        $post->setDraft(false);
-
-        $category->addBlogPost($post);
-        $this->assertNotEmpty($category->getBlogPost());
-        $category->removeBlogPost($post);
-        $this->assertEmpty($category->getBlogPost());*/
-
-        $group->getId();
+        $this->assertTrue($group->getConfigs() instanceof Collection);
+        $this->assertEmpty($group->getConfigs());
 
     }
 }

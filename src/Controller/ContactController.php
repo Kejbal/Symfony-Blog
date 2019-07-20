@@ -21,12 +21,21 @@ class ContactController extends ControllerBase
         GroupConfigRepository $groupConfig,
         TranslatorInterface $translator
     ) {
-
         if ($_POST) {
-            if ($request->request->get('name') && $request->request->get('email') && $request->request->get('phone') && $request->request->get('message')) {
+            if ($request->request->get('name')
+                && $request->request->get('email')
+                && $request->request->get('phone')
+                && $request->request->get('message')
+            ) {
 
                 $groupConfig = $groupConfig->findOneBy(['name' => 'Mail']);
-                $contactMail = $config->findOneBy(['groupConfig' => $groupConfig->getId(), 'base' => 'contact_mail']);
+
+                $args = [
+                    'groupConfig' => $groupConfig->getId(),
+                    'base' => 'contact_mail',
+                ];
+
+                $contactMail = $config->findOneBy($args);
 
                 $message = (new \Swift_Message('Contact from  webpage'))
                     ->setFrom($request->request->get('email'))

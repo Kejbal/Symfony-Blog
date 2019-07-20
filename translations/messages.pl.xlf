@@ -26,8 +26,8 @@
                 <target>Skontakuj się ze mną</target>
             </trans-unit>
             <trans-unit id="have_questions">
-                <source>}Have questions? I have answers.</source>
-                <target>}Masz pytania? Ja mam odpowiedzi.</target>
+                <source>Have questions? I have answers.</source>
+                <target>Masz pytania? Ja mam odpowiedzi.</target>
             </trans-unit>
             <trans-unit id="want_to_get_in_touch">
                 <source>Want to get in touch? Fill out the form below to send me a message and I will get back to you as soon as possible!</source>
@@ -58,8 +58,8 @@
                 <target>Proszę wpisać swój numer telefonu.</target>
             </trans-unit>
             <trans-unit id="message">
-                <source>}Message</source>
-                <target>}Wiadomość</target>
+                <source>Message</source>
+                <target>Wiadomość</target>
             </trans-unit>
             <trans-unit id="please_enter_a_message">
                 <source>Please enter a message.</source>

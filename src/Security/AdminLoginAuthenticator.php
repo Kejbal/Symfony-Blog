@@ -93,7 +93,7 @@ final class AdminLoginAuthenticator extends AbstractFormLoginAuthenticator imple
         return new RedirectResponse($this->router->generate('admin_login'));
     }
 
-    protected function getLoginUrl()
+    public function getLoginUrl()
     {
         return new RedirectResponse($this->router->generate('admin_login'));
     }

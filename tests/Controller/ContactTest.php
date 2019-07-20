@@ -4,6 +4,10 @@ namespace App\Tests\Controller;
 
 class ContactTest extends BaseWeb
 {
+    /**
+     * @group controller
+     * @group controller-contact
+     */
 
     public function testContact()
     {
@@ -18,16 +22,33 @@ class ContactTest extends BaseWeb
         $this->assertEquals(1, $crawler->filter('textarea#message')->count());
         $this->assertEquals(1, $crawler->filter('button#sendMessageButton')->count());
 
-        $send_button = $crawler->selectButton('Send');
+        /*$send_button = $crawler->selectButton('Send');
 
-        $form = $send_button->form(array(
-            'name' => 'Test',
-            'email' => 'admin@admin.com',
-            'phone' => '213243324',
-            'message' => 'Wiadomość testowa',
-        ));
+    $form = $send_button->form(array(
+    'name' => 'Test',
+    'email' => 'admin@admin.com',
+    'phone' => '213243324',
+    'message' => 'Wiadomość testowa',
+    ));
 
-        $crawler = $this->_client->submit($form);
+    $crawler = $this->_client->submit($form);
+
+    echo print_r($crawler);die();*/
+
+    }
+
+    public function testRequest()
+    {
+        $crawler = $this->_client->XmlHttpRequest(
+            'POST',
+            '/contact',
+            array(
+                'name' => 'Test',
+                'email' => 'admin@admin.com',
+                'phone' => '213243324',
+                'message' => 'Wiadomość testowa',
+            ),
+        );
 
     }
 

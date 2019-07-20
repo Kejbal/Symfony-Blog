@@ -6,7 +6,12 @@ use App\Entity\BlogPost;
 use App\Entity\Category;
 
 class BlogPostAdminTest extends BaseWeb
-{
+{   
+    /**
+     * @group admin
+     * @group admin-blog-post
+     * @group admin-blog-post-list
+     */
 
     public function testList()
     {
@@ -61,7 +66,7 @@ class BlogPostAdminTest extends BaseWeb
     public function AddEdit()
     {
         $category = self::$container->get('doctrine')->getRepository(Category::class)->findOneBy(array());
-        $category_id = $category->getId();
+        $categoryId = $category->getId();
 
         $crawler = $this->client->request('GET', 'admin/app/blogpost/create');
 
@@ -70,32 +75,59 @@ class BlogPostAdminTest extends BaseWeb
             $crawler->filter('textarea.ckeditor')->count()
         );
 
-        $send_button = $crawler->selectButton('Create');
-        $form = $send_button->form(array(
+        $sendButton = $crawler->selectButton('Create');
+        $form = $sendButton->form(array(
             's5d37a1acbf[title]' => 'Meik8ree',
             's5d37a1acbf[subtitle]' => 'uT6eSh9h',
             's5d37a1acbf[body]' => '<div>test</div>',
-            's5d37a1acbf[category]' => $category_id,
+            's5d37a1acbf[category]' => $categoryId,
             's5d37a1acbf[draft]' => true,
             's5d37a1acbf[language]' => '1',
         ));
         $crawler = $this->client->submit($form);
 
-        $post = self::$container->get('doctrine')->getRepository(BlogPost::class)->findOneBy(array('title' => 'Meik8ree', 'category' => $category_id, 'subtitle'=>'uT6eSh9h', 'language'=>'1'));
+        $post = self::$container->get('doctrine')->getRepository(BlogPost::class)->findOneBy(array('title' => 'Meik8ree', 'category' => $categoryId, 'subtitle'=>'uT6eSh9h', 'language'=>'1'));
+        
+        $this->assertTrue(!empty($post));
+
+        $this->assertTrue($crawler->filter('html:contains("Redirecting to")')->count() > 0);
+
+        $link1 = $crawler->filter('a')->attr('href');
+
+        $crawler = $this->client->request('GET', '/admin/app/blogpost/create');
+
+        $this->assertGreaterThan(
+            0,
+            $crawler->filter('textarea.ckeditor')->count()
+        );
+
+        $sendButton = $crawler->selectButton('Create');
+        $form = $sendButton->form(array(
+            's5d37a1acbf[title]' => 'Meik8ree',
+            's5d37a1acbf[subtitle]' => 'uT6eSh9h',
+            's5d37a1acbf[body]' => '<div>test</div>',
+            's5d37a1acbf[category]' => $categoryId,
+            's5d37a1acbf[draft]' => true,
+            's5d37a1acbf[language]' => '1',
+        ));
+        $crawler = $this->client->submit($form);
+
+        $post = self::$container->get('doctrine')->getRepository(BlogPost::class)->findOneBy(array('title' => 'Meik8ree', 'category' => $categoryId, 'subtitle'=>'uT6eSh9h', 'language'=>'1', 'slug'=>'meik8ree-0'));
         
         $this->assertTrue(!empty($post));
 
         $this->assertTrue($crawler->filter('html:contains("Redirecting to")')->count() > 0);
 
         $link = $crawler->filter('a')->attr('href');
-        $crawler = $this->client->request('GET', $link);
+
+        $crawler = $this->client->request('GET', $link1);
         
-        $send_button = $crawler->selectButton('Update');
-        $form = $send_button->form(array(
+        $sendButton = $crawler->selectButton('Update');
+        $form = $sendButton->form(array(
             's5d37a1acbf[title]' => 'Aaphoo9k',
             's5d37a1acbf[subtitle]' => 'wepuL4qu',
             's5d37a1acbf[body]' => '<div>test</div>',
-            's5d37a1acbf[category]' => $category_id,
+            's5d37a1acbf[category]' => $categoryId,
             's5d37a1acbf[draft]' => true,
             's5d37a1acbf[date][date][month]' => 3,
             's5d37a1acbf[date][date][day]' => 22,
@@ -106,12 +138,32 @@ class BlogPostAdminTest extends BaseWeb
         ));
         $crawler = $this->client->submit($form);
         
-        $post = self::$container->get('doctrine')->getRepository(BlogPost::class)->findOneBy(array('title' => 'Aaphoo9k', 'category' => $category_id, 'subtitle'=>'wepuL4qu', 'language'=>'2'));
+        $post = self::$container->get('doctrine')->getRepository(BlogPost::class)->findOneBy(array('title' => 'Aaphoo9k', 'category' => $categoryId, 'subtitle'=>'wepuL4qu', 'language'=>'2', 'slug'=>'aaphoo9k'));
+        $this->assertTrue(!empty($post));
+
+        $crawler = $this->client->request('GET', $link);
+        
+        $sendButton = $crawler->selectButton('Update');
+        $form = $sendButton->form(array(
+            's5d37a1acbf[title]' => 'Aaphoo9k',
+            's5d37a1acbf[subtitle]' => 'wepuL4qu',
+            's5d37a1acbf[body]' => '<div>test</div>',
+            's5d37a1acbf[category]' => $categoryId,
+            's5d37a1acbf[draft]' => true,
+            's5d37a1acbf[date][date][month]' => 3,
+            's5d37a1acbf[date][date][day]' => 22,
+            's5d37a1acbf[date][date][year]' => 2018,
+            's5d37a1acbf[date][time][hour]' => 2,
+            's5d37a1acbf[date][time][minute]' => 55,
+            's5d37a1acbf[language]' => '2',
+        ));
+        $crawler = $this->client->submit($form);
+        
+        $post = self::$container->get('doctrine')->getRepository(BlogPost::class)->findOneBy(array('title' => 'Aaphoo9k', 'category' => $categoryId, 'subtitle'=>'wepuL4qu', 'language'=>'2', 'slug'=>'aaphoo9k-0'));
         $this->assertTrue(!empty($post));
 
         $this->assertTrue($crawler->filter('html:contains("Redirecting to")')->count() > 0);
 
-        $link = $crawler->filter('a')->attr('href');
         $crawler = $this->client->request('GET', $link);
 
         $button = $crawler
@@ -121,15 +173,35 @@ class BlogPostAdminTest extends BaseWeb
 
         $crawler = $this->client->click($button);
 
-        $send_button = $crawler->selectButton('Yes, delete');
+        $sendButton = $crawler->selectButton('Yes, delete');
 
-        $form = $send_button->form();
+        $form = $sendButton->form();
 
         $crawler = $this->client->submit($form);
 
         $this->assertTrue($crawler->filter('html:contains("Redirecting to")')->count() > 0);
 
-        $post = self::$container->get('doctrine')->getRepository(BlogPost::class)->findOneBy(array('title' => 'Aaphoo9k', 'category' => $category_id));
+        $post = self::$container->get('doctrine')->getRepository(BlogPost::class)->findOneBy(array('title' => 'Aaphoo9k', 'category' => $categoryId, 'slug'=>'aaphoo9k-0'));
+        $this->assertTrue(!$post);
+
+        $crawler = $this->client->request('GET', $link1);
+
+        $button = $crawler
+            ->filter('a:contains("Delete")')
+            ->eq(0)
+            ->link();
+
+        $crawler = $this->client->click($button);
+
+        $sendButton = $crawler->selectButton('Yes, delete');
+
+        $form = $sendButton->form();
+
+        $crawler = $this->client->submit($form);
+
+        $this->assertTrue($crawler->filter('html:contains("Redirecting to")')->count() > 0);
+
+        $post = self::$container->get('doctrine')->getRepository(BlogPost::class)->findOneBy(array('title' => 'Aaphoo9k', 'category' => $categoryId, 'slug'=>'aaphoo9k'));
         $this->assertTrue(!$post);
 
     }

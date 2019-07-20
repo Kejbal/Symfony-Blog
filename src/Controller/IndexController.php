@@ -14,7 +14,7 @@ class IndexController extends ControllerBase
     public function index(Request $request, BlogPostRepository $blogPost)
     {
         $page = (int) $request->attributes->get('page');
-        $limit = 5;
+        $limit = $this->getParameter('post_limit');
         $showButtonOlder = false;
         $showButtonNewer = false;
 

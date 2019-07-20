@@ -19,8 +19,11 @@ class AllPageTest extends WebTestCase
 
         $this->assertTrue($client->getResponse()->isSuccessful());
 
-        $menu = new Menu();
-        $menu->Menu($crawler, $client);
+        if ($url !== '/admin/login') {
+            $menu = new Menu();
+            $menu->Menu($crawler, $client);
+        }
+
     }
 
     public function provideUrls()
@@ -34,6 +37,7 @@ class AllPageTest extends WebTestCase
             array('/kategoria'),
             array('/wpis'),
             array('/kontakt'),
+            array('/admin/login'),
         );
     }
 
