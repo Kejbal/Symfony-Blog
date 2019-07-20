@@ -21,7 +21,7 @@ class ContactController extends ControllerBase
         GroupConfigRepository $groupConfig,
         TranslatorInterface $translator
     ) {
-        if ($_POST) {
+        if ($request->request->all()) {
             if ($request->request->get('name')
                 && $request->request->get('email')
                 && $request->request->get('phone')
@@ -48,6 +48,9 @@ class ContactController extends ControllerBase
 
                 $arrData = ['success' => $result];
                 return new JsonResponse($arrData);
+            } else {
+                $arrData = ['success' => 0];
+                return new JsonResponse($arrData);
             }
         }
 
@@ -55,30 +58,4 @@ class ContactController extends ControllerBase
         return $this->render('contact/index.html.twig', $this->_dataView);
     }
 
-    public function mail(\Swift_Mailer $mailer)
-    {
-        $message = (new \Swift_Message('Hello Email'))
-            ->setFrom('testkejbal@gmail.com')
-            ->setTo('kejbal@gmail.com')
-            ->setBody(
-                'You should see me from the profiler!',
-                'You should see me from the profiler!'
-            )
-            /*
-         * If you also want to include a plaintext version of the message
-        ->addPart(
-        $this->renderView(
-        'emails/registration.txt.twig',
-        ['name' => $name]
-        ),
-        'text/plain'
-        )
-         */
-        ;
-        $errors = [];
-        $result = $mailer->send($message, $errors);
-
-        $this->_dataView['controllerName'] = 'ContactController';
-        return $this->render('contact/index.html.twig', $this->_dataView);
-    }
 }

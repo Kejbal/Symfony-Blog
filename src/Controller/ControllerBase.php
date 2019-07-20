@@ -15,7 +15,7 @@ class ControllerBase extends AbstractController
     {
 
         $request = $requestStack->getCurrentRequest();
-        $locale = $request->getLocale();
+        $locale = ($request !== null && $request->getLocale() ? $request->getLocale() : 'en');
         $language = $languages->findOneBy(array('iso_code' => $locale));
 
         $links = array();

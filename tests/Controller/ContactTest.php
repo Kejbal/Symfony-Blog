@@ -2,6 +2,14 @@
 
 namespace App\Tests\Controller;
 
+use App\Controller\ContactController;
+use App\Entity\BlogPost;
+use App\Entity\Category;
+use App\Entity\Config;
+use App\Entity\GroupConfig;
+use App\Entity\Language;
+use Symfony\Component\HttpFoundation\Request;
+
 class ContactTest extends BaseWeb
 {
     /**
@@ -22,33 +30,35 @@ class ContactTest extends BaseWeb
         $this->assertEquals(1, $crawler->filter('textarea#message')->count());
         $this->assertEquals(1, $crawler->filter('button#sendMessageButton')->count());
 
-        /*$send_button = $crawler->selectButton('Send');
+        $category = self::$container->get('doctrine')->getRepository(Category::class);
+        $blogPost = self::$container->get('doctrine')->getRepository(BlogPost::class);
+        $language = self::$container->get('doctrine')->getRepository(Language::class);
+        $requestStack = self::$container->get('request_stack');
 
-    $form = $send_button->form(array(
-    'name' => 'Test',
-    'email' => 'admin@admin.com',
-    'phone' => '213243324',
-    'message' => 'Wiadomość testowa',
-    ));
+        $request = new Request;
+        $mailer = self::$container->get('swiftmailer.mailer.default');
+        $config = self::$container->get('doctrine')->getRepository(Config::class);
+        $groupConfig = self::$container->get('doctrine')->getRepository(GroupConfig::class);
+        $translator = self::$container->get('translator.default');
 
-    $crawler = $this->_client->submit($form);
+        $request->request->set('name', '12');
 
-    echo print_r($crawler);die();*/
+        $controller = new ContactController($category, $blogPost, $language, $requestStack);
+        $result = $controller->index($request, $mailer, $config, $groupConfig, $translator);
+        $result = json_decode($result->getContent());
 
-    }
+        $this->assertEquals(0, $result->success);
 
-    public function testRequest()
-    {
-        $crawler = $this->_client->XmlHttpRequest(
-            'POST',
-            '/contact',
-            array(
-                'name' => 'Test',
-                'email' => 'admin@admin.com',
-                'phone' => '213243324',
-                'message' => 'Wiadomość testowa',
-            ),
-        );
+        $request->request->set('name', 'Test');
+        $request->request->set('email', 'admin@admin.com');
+        $request->request->set('phone', '213243324');
+        $request->request->set('message', 'Wiadomość testowa');
+
+        $controller = new ContactController($category, $blogPost, $language, $requestStack);
+        $result = $controller->index($request, $mailer, $config, $groupConfig, $translator);
+        $result = json_decode($result->getContent());
+
+        $this->assertEquals(1, $result->success);
 
     }
 
