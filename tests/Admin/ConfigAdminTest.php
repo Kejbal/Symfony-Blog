@@ -6,12 +6,17 @@ use App\Entity\Config;
 
 class ConfigAdminTest extends BaseWeb
 {
+    /**
+     * @group admin
+     * @group admin-config
+     * @group admin-config-list
+     */
 
     public function testList()
     {
         $config = self::$container->get('doctrine')->getRepository(Config::class)->findOneBy(array());
 
-        $crawler = $this->client->request('GET', 'admin/app/config/list');
+        $crawler = $this->_client->request('GET', 'admin/app/config/list');
 
         if (!$config) {
 
@@ -46,10 +51,16 @@ class ConfigAdminTest extends BaseWeb
 
     }
 
+    /**
+     * @group admin
+     * @group admin-config
+     * @group admin-config-add-edit
+     */
+
     public function testAddEdit()
     {
 
-        $crawler = $this->client->request('GET', 'admin/app/config/create');
+        $crawler = $this->_client->request('GET', 'admin/app/config/create');
 
         $send_button = $crawler->selectButton('Create');
 
@@ -59,16 +70,16 @@ class ConfigAdminTest extends BaseWeb
             's7d07f9e8fc[group_config]' => '5',
         ));
 
-        $crawler = $this->client->submit($form);
+        $crawler = $this->_client->submit($form);
 
-        $config = self::$container->get('doctrine')->getRepository(Config::class)->findOneBy(array('base' => 'Config', 'value'=>'Value'));
+        $config = self::$container->get('doctrine')->getRepository(Config::class)->findOneBy(array('base' => 'Config', 'value' => 'Value'));
         $this->assertTrue(!empty($config));
 
         $this->assertTrue($crawler->filter('html:contains("Redirecting to")')->count() > 0);
 
         $link = $crawler->filter('a')->attr('href');
 
-        $crawler = $this->client->request('GET', $link);
+        $crawler = $this->_client->request('GET', $link);
 
         $send_button = $crawler->selectButton('Update');
 
@@ -78,31 +89,31 @@ class ConfigAdminTest extends BaseWeb
             's7d07f9e8fc[group_config]' => '5',
         ));
 
-        $crawler = $this->client->submit($form);
+        $crawler = $this->_client->submit($form);
 
-        $config = self::$container->get('doctrine')->getRepository(Config::class)->findOneBy(array('base' => 'meiJai0p', 'value'=>'Ot9Pahfa'));
+        $config = self::$container->get('doctrine')->getRepository(Config::class)->findOneBy(array('base' => 'meiJai0p', 'value' => 'Ot9Pahfa'));
         $this->assertTrue(!empty($config));
 
         $this->assertTrue($crawler->filter('html:contains("Redirecting to")')->count() > 0);
 
-        $crawler = $this->client->request('GET', $link);
+        $crawler = $this->_client->request('GET', $link);
 
         $button = $crawler
             ->filter('a:contains("Delete")')
             ->eq(0)
             ->link();
 
-        $crawler = $this->client->click($button);
+        $crawler = $this->_client->click($button);
 
         $send_button = $crawler->selectButton('Yes, delete');
 
         $form = $send_button->form();
 
-        $crawler = $this->client->submit($form);
+        $crawler = $this->_client->submit($form);
 
         $this->assertTrue($crawler->filter('html:contains("Redirecting to")')->count() > 0);
 
-        $config= self::$container->get('doctrine')->getRepository(Config::class)->findOneBy(array('base' => 'Bahd4Sut'));
+        $config = self::$container->get('doctrine')->getRepository(Config::class)->findOneBy(array('base' => 'Bahd4Sut'));
         $this->assertTrue(!$config);
 
     }

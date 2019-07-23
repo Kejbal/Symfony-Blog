@@ -9,6 +9,10 @@ use PHPUnit\Framework\TestCase;
 
 class LangaugeTest extends TestCase
 {
+    /**
+     * @group entity
+     * @group entity-langauge
+     */
 
     public function testEntity()
     {

@@ -6,6 +6,10 @@ use App\Entity\BlogPost;
 
 class IndexTest extends BaseWeb
 {
+    /**
+     * @group controller
+     * @group controller-index
+     */
 
     public function testHome()
     {

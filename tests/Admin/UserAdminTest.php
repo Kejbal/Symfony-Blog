@@ -6,13 +6,19 @@ use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class UserAdminTest extends BaseWeb
-{
+{   
+    /**
+     * @group admin
+     * @group admin-user-admin
+     * @group admin-user-admin-list
+     */
+
     public function testList()
     {
 
         $user = self::$container->get('doctrine')->getRepository(User::class)->findOneBy(array());
 
-        $crawler = $this->client->request('GET', 'admin/app/user/list');
+        $crawler = $this->_client->request('GET', 'admin/app/user/list');
 
         if (!$user) {
 
@@ -57,12 +63,18 @@ class UserAdminTest extends BaseWeb
 
     }
 
+    /**
+     * @group admin
+     * @group admin-user-admin
+     * @group admin-user-admin-add-edit
+     */
+
     public function testAddEdit()
     {
         $user = self::$container->get('doctrine')->getRepository(User::class)->findOneBy(array());
         $this->assertTrue(!empty($user));
 
-        $crawler = $this->client->request('GET', '/admin/app/user/create');
+        $crawler = $this->_client->request('GET', '/admin/app/user/create');
 
         $send_button = $crawler->selectButton('Create');
 
@@ -72,7 +84,7 @@ class UserAdminTest extends BaseWeb
             's8feb4ca090[roles]' => array('ROLE_ADMIN'),
             's8feb4ca090[status]' => true,
         ));
-        $crawler = $this->client->submit($form);
+        $crawler = $this->_client->submit($form);
 
         $user = self::$container->get('doctrine')->getRepository(User::class)->findOneBy(array('email' => 'admin1@admin.com', 'status' => '1'));
         $this->assertTrue(!empty($user));
@@ -81,7 +93,7 @@ class UserAdminTest extends BaseWeb
 
         $link = $crawler->filter('a')->attr('href');
 
-        $crawler = $this->client->request('GET', '/admin/app/user/create');
+        $crawler = $this->_client->request('GET', '/admin/app/user/create');
 
         $send_button = $crawler->selectButton('Create');
 
@@ -91,21 +103,21 @@ class UserAdminTest extends BaseWeb
             's8feb4ca090[roles]' => array('ROLE_ADMIN'),
             's8feb4ca090[status]' => true,
         ));
-        $crawler = $this->client->submit($form);
+        $crawler = $this->_client->submit($form);
 
         $this->assertTrue($crawler->filter('.list-unstyled:contains("This value is already used")')->count() > 0);
 
-        $crawler = $this->client->request('GET', $link);
+        $crawler = $this->_client->request('GET', $link);
 
         $send_button = $crawler->selectButton('Update');
         $form = $send_button->form(array(
             's8feb4ca090[email]' => 'admin2@admin.com',
-            's8feb4ca090[plainPassword]' => 'El4aiyoh',
+            's8feb4ca090[plainPassword]' => '',
             's8feb4ca090[roles]' => array('ROLE_ADMIN'),
             's8feb4ca090[status]' => true,
         ));
 
-        $crawler = $this->client->submit($form);
+        $crawler = $this->_client->submit($form);
 
         $user = self::$container->get('doctrine')->getRepository(User::class)->findOneBy(array('email' => 'admin2@admin.com', 'status' => '1'));
         $this->assertTrue(!empty($user));
@@ -115,20 +127,20 @@ class UserAdminTest extends BaseWeb
         $this->assertTrue($crawler->filter('html:contains("Redirecting to")')->count() > 0);
 
         $link = $crawler->filter('a')->attr('href');
-        $crawler = $this->client->request('GET', $link);
+        $crawler = $this->_client->request('GET', $link);
 
         $button = $crawler
             ->filter('a:contains("Delete")')
             ->eq(0)
             ->link();
 
-        $crawler = $this->client->click($button);
+        $crawler = $this->_client->click($button);
 
         $send_button = $crawler->selectButton('Yes, delete');
 
         $form = $send_button->form();
 
-        $crawler = $this->client->submit($form);
+        $crawler = $this->_client->submit($form);
 
         $this->assertTrue($crawler->filter('html:contains("Redirecting to")')->count() > 0);
 

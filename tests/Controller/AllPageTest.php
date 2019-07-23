@@ -9,6 +9,9 @@ class AllPageTest extends WebTestCase
 
     /**
      * @dataProvider provideUrls
+     *
+     * @group controller
+     * @group controller-success
      */
 
     public function testPageIsSuccessful($url)

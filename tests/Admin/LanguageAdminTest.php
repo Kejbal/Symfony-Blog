@@ -6,12 +6,17 @@ use App\Entity\Language;
 
 class LanguageAdminTest extends BaseWeb
 {
+    /**
+     * @group admin
+     * @group admin-language
+     * @group admin-language-list
+     */
 
     public function testList()
     {
         $languages = self::$container->get('doctrine')->getRepository(Language::class)->findOneBy(array());
 
-        $crawler = $this->client->request('GET', 'admin/app/language/list');
+        $crawler = $this->_client->request('GET', 'admin/app/language/list');
 
         if (!$languages) {
 
@@ -56,10 +61,16 @@ class LanguageAdminTest extends BaseWeb
 
     }
 
+    /**
+     * @group admin
+     * @group admin-language
+     * @group admin-language-add-edit
+     */
+
     public function testAddEdit()
     {
 
-        $crawler = $this->client->request('GET', 'admin/app/language/create');
+        $crawler = $this->_client->request('GET', 'admin/app/language/create');
 
         $send_button = $crawler->selectButton('Create');
 
@@ -69,7 +80,7 @@ class LanguageAdminTest extends BaseWeb
             'sb7a5b9a2c3[status]' => '1',
         ));
 
-        $crawler = $this->client->submit($form);
+        $crawler = $this->_client->submit($form);
 
         $language = self::$container->get('doctrine')->getRepository(Language::class)->findOneBy(array('name' => 'Polish11'));
         $this->assertTrue(!empty($language));
@@ -78,7 +89,7 @@ class LanguageAdminTest extends BaseWeb
 
         $link = $crawler->filter('a')->attr('href');
 
-        $crawler = $this->client->request('GET', $link);
+        $crawler = $this->_client->request('GET', $link);
 
         $send_button = $crawler->selectButton('Update');
 
@@ -88,7 +99,7 @@ class LanguageAdminTest extends BaseWeb
             'sb7a5b9a2c3[status]' => '1',
         ));
 
-        $crawler = $this->client->submit($form);
+        $crawler = $this->_client->submit($form);
 
         $language = self::$container->get('doctrine')->getRepository(Language::class)->findOneBy(array('name' => 'Hu4thahr'));
         $this->assertTrue(!empty($language));
@@ -97,20 +108,20 @@ class LanguageAdminTest extends BaseWeb
 
         $link = $crawler->filter('a')->attr('href');
 
-        $crawler = $this->client->request('GET', '/admin/app/language/' . $language->getId() . '/edit');
+        $crawler = $this->_client->request('GET', '/admin/app/language/' . $language->getId() . '/edit');
 
         $button = $crawler
             ->filter('a:contains("Delete")')
             ->eq(0)
             ->link();
 
-        $crawler = $this->client->click($button);
+        $crawler = $this->_client->click($button);
 
         $send_button = $crawler->selectButton('Yes, delete');
 
         $form = $send_button->form();
 
-        $crawler = $this->client->submit($form);
+        $crawler = $this->_client->submit($form);
 
         $this->assertTrue($crawler->filter('html:contains("Redirecting to")')->count() > 0);
 

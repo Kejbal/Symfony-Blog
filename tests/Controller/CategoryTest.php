@@ -7,7 +7,11 @@ use App\Entity\Category;
 use App\Entity\Language;
 
 class CategoryTest extends BaseWeb
-{
+{   
+    /**
+     * @group controller
+     * @group controller-category
+     */
 
     public function testCategory()
     {

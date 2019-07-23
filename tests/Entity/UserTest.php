@@ -7,6 +7,10 @@ use PHPUnit\Framework\TestCase;
 
 class UserTest extends TestCase
 {
+    /**
+     * @group user
+     * @group user-langauge
+     */
 
     public function testEntity()
     {

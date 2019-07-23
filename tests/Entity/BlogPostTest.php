@@ -9,6 +9,10 @@ use PHPUnit\Framework\TestCase;
 
 class BlogPostTest extends TestCase
 {
+    /**
+     * @group entity
+     * @group entity-blog-post
+     */
 
     public function testEntity()
     {

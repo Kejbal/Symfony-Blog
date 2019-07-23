@@ -7,6 +7,10 @@ use App\Entity\Language;
 
 class PostTest extends BaseWeb
 {
+    /**
+     * @group controller
+     * @group controller-post
+     */
 
     public function testPost()
     {

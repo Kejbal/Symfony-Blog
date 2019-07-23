@@ -9,6 +9,10 @@ use PHPUnit\Framework\TestCase;
 
 class CategoryTest extends TestCase
 {
+    /**
+     * @group entity
+     * @group entity-category
+     */
 
     public function testEntity()
     {

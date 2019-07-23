@@ -7,14 +7,17 @@ class AllPageTest extends BaseWeb
 
     /**
      * @dataProvider provideUrls
+     *
+     * @group admin
+     * @group admin-success
      */
 
     public function testPageIsSuccessful($url)
     {
 
-        $crawler = $this->client->request('GET', $url);
+        $crawler = $this->_client->request('GET', $url);
 
-        $this->assertTrue($this->client->getResponse()->isSuccessful());
+        $this->assertTrue($this->_client->getResponse()->isSuccessful());
 
         if ($url !== 'admin/login') {
 

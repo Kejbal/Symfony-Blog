@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 class BaseWeb extends WebTestCase
 {
 
-    protected $client;
+    protected $_client;
 
     public function setUp()
     {
@@ -31,6 +31,6 @@ class BaseWeb extends WebTestCase
         $cookie = new Cookie($session->getName(), $session->getId());
         $client->getCookieJar()->set($cookie);
 
-        $this->client = $client;
+        $this->_client = $client;
     }
 }
