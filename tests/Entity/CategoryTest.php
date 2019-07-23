@@ -16,7 +16,6 @@ class CategoryTest extends TestCase
 
     public function testEntity()
     {
-
         $category = new Category();
 
         $category->getId();
@@ -43,6 +42,5 @@ class CategoryTest extends TestCase
         $this->assertNotEmpty($category->getBlogPost());
         $category->removeBlogPost($post);
         $this->assertEmpty($category->getBlogPost());
-
     }
 }

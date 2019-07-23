@@ -13,7 +13,6 @@ class HashPasswordListener implements EventSubscriber
     public function __construct(UserPasswordEncoder $passwordEncoder)
     {
         $this->passwordEncoder = $passwordEncoder;
-
     }
 
     public function getSubscribedEvents()

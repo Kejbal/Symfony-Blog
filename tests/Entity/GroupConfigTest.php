@@ -16,7 +16,6 @@ class GroupConfigTest extends TestCase
 
     public function testEntity()
     {
-
         $group = new GroupConfig();
 
         $this->assertNull($group->getId());
@@ -38,6 +37,5 @@ class GroupConfigTest extends TestCase
 
         $this->assertTrue($group->getConfigs() instanceof Collection);
         $this->assertEmpty($group->getConfigs());
-
     }
 }

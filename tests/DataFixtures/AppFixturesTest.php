@@ -21,5 +21,4 @@ class AppFixturesTest extends KernelTestCase
         $fixture = new AppFixtures;
         $this->assertNull($fixture->load($manager));
     }
-
 }

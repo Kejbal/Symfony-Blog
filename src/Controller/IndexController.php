@@ -27,17 +27,16 @@ class IndexController extends ControllerBase
         }
 
         $posts = $blogPost->findBy(['draft' => '0'], ['id' => 'DESC'], $limit, $limitOffset);
-
         $allPosts = $blogPost->findBy(['draft' => '0']);
         if (count($allPosts) > $limit * $page) {
             $showButtonOlder = true;
         }
 
-        $this->_dataView['controllerName'] = 'IndexController';
-        $this->_dataView['posts'] = $posts;
-        $this->_dataView['showButtonOlder'] = $showButtonOlder;
-        $this->_dataView['showButtonNewer'] = $showButtonNewer;
-        $this->_dataView['currentPage'] = $page;
-        return $this->render('index/index.html.twig', $this->_dataView);
+        $this->dataView['controllerName'] = 'IndexController';
+        $this->dataView['posts'] = $posts;
+        $this->dataView['showButtonOlder'] = $showButtonOlder;
+        $this->dataView['showButtonNewer'] = $showButtonNewer;
+        $this->dataView['currentPage'] = $page;
+        return $this->render('index/index.html.twig', $this->dataView);
     }
 }

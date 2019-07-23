@@ -28,8 +28,8 @@ class CategorySlugListener implements EventSubscriber
 
         $i = 0;
         do {
-
-            $categoryRow = $em->createQuery('SELECT c FROM App:Category c WHERE c.slug=:slug ORDER BY c.name ASC')->setParameter('slug', $entity->getSlug())
+            $categoryRow = $em->createQuery('SELECT c FROM App:Category c WHERE c.slug=:slug ORDER BY c.name ASC')
+                ->setParameter('slug', $entity->getSlug())
                 ->getResult();
 
             if (empty($categoryRow)) {
@@ -39,9 +39,7 @@ class CategorySlugListener implements EventSubscriber
             $entity->setSlug($entity->getName() . '-' . $i);
 
             $i++;
-
         } while (!empty($categoryRow));
-
     }
 
     public function preUpdate(LifecycleEventArgs $args)
@@ -59,8 +57,8 @@ class CategorySlugListener implements EventSubscriber
 
         $i = 0;
         do {
-
-            $categoryRow = $em->createQuery('SELECT c FROM App:Category c WHERE c.slug=:slug ORDER BY c.name ASC')->setParameter('slug', $entity->getSlug())
+            $categoryRow = $em->createQuery('SELECT c FROM App:Category c WHERE c.slug=:slug ORDER BY c.name ASC')
+                ->setParameter('slug', $entity->getSlug())
                 ->getResult();
 
             if (empty($categoryRow)) {
@@ -70,11 +68,9 @@ class CategorySlugListener implements EventSubscriber
             $entity->setSlug($entity->getName() . '-' . $i);
 
             $i++;
-
         } while (0);
 
         $meta = $em->getClassMetadata(get_class($entity));
         $em->getUnitOfWork()->recomputeSingleEntityChangeSet($meta, $entity);
     }
-
 }

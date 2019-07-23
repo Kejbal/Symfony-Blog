@@ -16,7 +16,6 @@ class LangaugeTest extends TestCase
 
     public function testEntity()
     {
-
         $language = new Language();
 
         $language->getId();
@@ -41,6 +40,5 @@ class LangaugeTest extends TestCase
         $this->assertNotEmpty($language->getBlogPosts());
         $language->removeBlogPost($post);
         $this->assertEmpty($language->getBlogPosts());
-
     }
 }

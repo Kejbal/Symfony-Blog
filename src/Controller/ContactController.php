@@ -27,23 +27,18 @@ class ContactController extends ControllerBase
                 && $request->request->get('phone')
                 && $request->request->get('message')
             ) {
-
                 $groupConfig = $groupConfig->findOneBy(['name' => 'Mail']);
-
                 $args = [
                     'groupConfig' => $groupConfig->getId(),
                     'base' => 'contact_mail',
                 ];
-
                 $contactMail = $config->findOneBy($args);
-
                 $message = (new \Swift_Message('Contact from  webpage'))
                     ->setFrom($request->request->get('email'))
                     ->setTo($contactMail->getValue())
                     ->setBody(
                         $request->request->get('message')
                     );
-
                 $result = $mailer->send($message, $errors);
 
                 $arrData = ['success' => $result];
@@ -54,8 +49,7 @@ class ContactController extends ControllerBase
             }
         }
 
-        $this->_dataView['controllerName'] = 'ContactController';
-        return $this->render('contact/index.html.twig', $this->_dataView);
+        $this->dataView['controllerName'] = 'ContactController';
+        return $this->render('contact/index.html.twig', $this->dataView);
     }
-
 }

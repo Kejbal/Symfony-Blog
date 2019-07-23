@@ -26,7 +26,6 @@ class AllPageTest extends WebTestCase
             $menu = new Menu();
             $menu->Menu($crawler, $client);
         }
-
     }
 
     public function provideUrls()
@@ -43,5 +42,4 @@ class AllPageTest extends WebTestCase
             array('/admin/login'),
         );
     }
-
 }

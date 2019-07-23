@@ -30,7 +30,6 @@ class UserAdmin extends AbstractAdmin
                     'Active' => true,
                     'Inactive' => false,
                 )));
-
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -38,7 +37,6 @@ class UserAdmin extends AbstractAdmin
         $datagridMapper->add('email');
         $datagridMapper->add('roles');
         $datagridMapper->add('status');
-
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -46,6 +44,5 @@ class UserAdmin extends AbstractAdmin
         $listMapper->addIdentifier('email');
         $listMapper->addIdentifier('roles');
         $listMapper->addIdentifier('status');
-
     }
 }

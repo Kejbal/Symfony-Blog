@@ -14,13 +14,10 @@ class AllPageTest extends BaseWeb
 
     public function testPageIsSuccessful($url)
     {
-
-        $crawler = $this->_client->request('GET', $url);
-
-        $this->assertTrue($this->_client->getResponse()->isSuccessful());
+        $crawler = $this->client->request('GET', $url);
+        $this->assertTrue($this->client->getResponse()->isSuccessful());
 
         if ($url !== 'admin/login') {
-
             $menu = new Menu();
             $menu->Menu($crawler);
         }
@@ -37,5 +34,4 @@ class AllPageTest extends BaseWeb
             array('admin/login'),
         );
     }
-
 }

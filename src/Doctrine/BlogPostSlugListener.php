@@ -28,7 +28,8 @@ class BlogPostSlugListener implements EventSubscriber
 
         $i = 0;
         do {
-            $postRow = $em->createQuery('SELECT bp FROM App:BlogPost bp WHERE bp.slug=:slug ORDER BY bp.id ASC')->setParameter('slug', $entity->getSlug())
+            $postRow = $em->createQuery('SELECT bp FROM App:BlogPost bp WHERE bp.slug=:slug ORDER BY bp.id ASC')
+                ->setParameter('slug', $entity->getSlug())
                 ->getResult();
 
             if (empty($postRow)) {
@@ -38,9 +39,7 @@ class BlogPostSlugListener implements EventSubscriber
             $entity->setSlug($entity->getTitle() . '-' . $i);
 
             $i++;
-
         } while (!empty($postRow));
-
     }
 
     public function preUpdate(LifecycleEventArgs $args)
@@ -58,8 +57,8 @@ class BlogPostSlugListener implements EventSubscriber
 
         $i = 0;
         do {
-
-            $postRow = $em->createQuery('SELECT bp FROM App:BlogPost bp WHERE bp.slug=:slug ORDER BY bp.id ASC')->setParameter('slug', $entity->getSlug())
+            $postRow = $em->createQuery('SELECT bp FROM App:BlogPost bp WHERE bp.slug=:slug ORDER BY bp.id ASC')
+                ->setParameter('slug', $entity->getSlug())
                 ->getResult();
 
             if (empty($postRow)) {
@@ -69,11 +68,9 @@ class BlogPostSlugListener implements EventSubscriber
             $entity->setSlug($entity->getTitle() . '-' . $i);
 
             $i++;
-
         } while (1);
 
         $meta = $em->getClassMetadata(get_class($entity));
         $em->getUnitOfWork()->recomputeSingleEntityChangeSet($meta, $entity);
     }
-
 }

@@ -2,13 +2,13 @@
 // src/Admin/CategoryAdmin.php
 namespace App\Admin;
 
+use App\Entity\GroupConfig;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use App\Entity\GroupConfig;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ConfigAdmin extends AbstractAdmin
 {

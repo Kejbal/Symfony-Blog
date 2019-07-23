@@ -19,8 +19,12 @@ class ContactTest extends BaseWeb
 
     public function testContact()
     {
-        $crawler = $this->_client->request('GET', '/contact');
-        $this->assertEquals(1, $crawler->filter('.page-heading h1:contains("Contact Me")')->count());
+        $crawler = $this->client->request('GET', '/contact');
+        $this->assertEquals(
+            1,
+            $crawler->filter('.page-heading h1:contains("Contact Me")')
+                ->count()
+        );
 
         $this->assertEquals(2, $crawler->filter('form')->count());
 
@@ -59,7 +63,5 @@ class ContactTest extends BaseWeb
         $result = json_decode($result->getContent());
 
         $this->assertEquals(1, $result->success);
-
     }
-
 }

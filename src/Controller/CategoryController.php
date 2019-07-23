@@ -15,8 +15,13 @@ class CategoryController extends ControllerBase
     /**
      * @Route("/category", name="category")
      */
-    public function index(Request $request, LanguageRepository $language, CategoryRepository $category, BlogPostRepository $blogPost, TranslatorInterface $translator)
-    {
+    public function index(
+        Request $request,
+        LanguageRepository $language,
+        CategoryRepository $category,
+        BlogPostRepository $blogPost,
+        TranslatorInterface $translator
+    ) {
         $slug = $request->attributes->get('slug');
         $page = $request->attributes->get('page');
 
@@ -56,13 +61,13 @@ class CategoryController extends ControllerBase
             $showButtonOlder = true;
         }
 
-        $this->_dataView['posts'] = $posts;
-        $this->_dataView['showButtonOlder'] = $showButtonOlder;
-        $this->_dataView['showButtonNewer'] = $showButtonNewer;
-        $this->_dataView['currentPage'] = $page;
-        $this->_dataView['currentCategory'] = $slug;
+        $this->dataView['posts'] = $posts;
+        $this->dataView['showButtonOlder'] = $showButtonOlder;
+        $this->dataView['showButtonNewer'] = $showButtonNewer;
+        $this->dataView['currentPage'] = $page;
+        $this->dataView['currentCategory'] = $slug;
 
-        $this->_dataView['controllerName'] = 'CategoryController';
-        return $this->render('category/index.html.twig', $this->_dataView);
+        $this->dataView['controllerName'] = 'CategoryController';
+        return $this->render('category/index.html.twig', $this->dataView);
     }
 }

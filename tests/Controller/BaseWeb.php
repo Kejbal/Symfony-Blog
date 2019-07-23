@@ -7,13 +7,13 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 class BaseWeb extends WebTestCase
 {
 
-    protected $_client;
+    protected $client;
     public $locale;
 
     public function setUp()
     {
         self::bootKernel();
         $client = static::createClient();
-        $this->_client = $client;
+        $this->client = $client;
     }
 }

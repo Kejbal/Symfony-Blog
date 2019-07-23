@@ -14,7 +14,6 @@ class UserTest extends TestCase
 
     public function testEntity()
     {
-
         $user = new User();
 
         $user->getId();
@@ -35,6 +34,5 @@ class UserTest extends TestCase
         $this->assertEquals(array('ROLE_ADMIN', 'ROLE_USER'), $user->getRoles());
 
         $user->getSalt();
-
     }
 }

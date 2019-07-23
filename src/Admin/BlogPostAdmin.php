@@ -32,17 +32,16 @@ class BlogPostAdmin extends AbstractAdmin
                 'choices' => array(
                     'Yes' => true,
                     'No' => false,
-                )))->add('language', EntityType::class, [
+                )))->add('language', EntityType::class, array(
             'class' => Language::class,
             'choice_label' => 'name',
             'required' => false,
             'placeholder' => 'Please select entity',
-        ]);
+        ));
 
         if (!$this->isCurrentRoute('create')) {
             $formMapper->add('date', DateTimeType::class);
         }
-
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -50,7 +49,6 @@ class BlogPostAdmin extends AbstractAdmin
         $datagridMapper->add('title');
         $datagridMapper->add('category.name');
         $datagridMapper->add('language');
-
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -58,6 +56,5 @@ class BlogPostAdmin extends AbstractAdmin
         $listMapper->addIdentifier('title');
         $listMapper->add('category.name');
         $listMapper->add('language');
-
     }
 }

@@ -16,7 +16,6 @@ class BlogPostTest extends TestCase
 
     public function testEntity()
     {
-
         $post = new BlogPost();
 
         $post->getId();
@@ -48,6 +47,5 @@ class BlogPostTest extends TestCase
         $language = new Language;
         $post->setLanguage($language);
         $this->assertEquals($language, $post->getLanguage($language));
-
     }
 }

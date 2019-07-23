@@ -18,7 +18,6 @@ class PostController extends ControllerBase
 
         $slug = $request->attributes->get('slug');
         $post = new BlogPost;
-
         if (empty($slug)) {
             $slug = 0;
         }
@@ -33,8 +32,8 @@ class PostController extends ControllerBase
             $post = $blogPost->findOneBy(['slug' => $slug]);
         }
 
-        $this->_dataView['post'] = $post;
-        $this->_dataView['controllerName'] = 'PostController';
-        return $this->render('post/index.html.twig', $this->_dataView);
+        $this->dataView['post'] = $post;
+        $this->dataView['controllerName'] = 'PostController';
+        return $this->render('post/index.html.twig', $this->dataView);
     }
 }

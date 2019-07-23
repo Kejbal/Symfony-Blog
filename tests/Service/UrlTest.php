@@ -17,7 +17,5 @@ class UrlTest extends TestCase
         $text = 'sdf@ dfs#R.TA2';
         $slug = UrlService::slug($text);
         $this->assertEquals("sdf-dfs-r-ta2", $slug);
-
     }
-
 }

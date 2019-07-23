@@ -15,7 +15,6 @@ class ConfigTest extends TestCase
 
     public function testEntity()
     {
-
         $config = new Config();
 
         $config->getId();
@@ -30,6 +29,5 @@ class ConfigTest extends TestCase
         $group->setName('test');
         $config->setGroupConfig($group);
         $this->assertEquals($group, $config->getGroupConfig());
-
     }
 }

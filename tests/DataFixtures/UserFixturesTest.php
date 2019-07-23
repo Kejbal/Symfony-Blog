@@ -23,5 +23,4 @@ class UserFixturesTest extends KernelTestCase
 
         $this->assertNull($fixture->load($manager));
     }
-
 }

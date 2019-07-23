@@ -10,14 +10,14 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 class UserProviderTest extends KernelTestCase
 {
 
-    private $_userProvider;
+    private $userProvider;
 
     protected function setUp()
     {
         self::bootKernel();
 
         $em = self::$container->get('doctrine')->getManager();
-        $this->_userProvider = new UserProvider($em);
+        $this->userProvider = new UserProvider($em);
     }
 
     /**
@@ -32,15 +32,10 @@ class UserProviderTest extends KernelTestCase
         $user = new User;
 
         try {
-
-            $reloadedUser = $this->_userProvider->refreshUser($user);
-
+            $reloadedUser = $this->userProvider->refreshUser($user);
         } catch (\Exception $e) {
-
             $this->assertEquals('User with ID "" could not be reloaded.', $e->getMessage());
-
         }
-
     }
 
     /**
@@ -51,9 +46,7 @@ class UserProviderTest extends KernelTestCase
 
     public function testSupportsClass()
     {
-        $this->assertTrue($this->_userProvider->supportsClass(User::class));
-
-        $this->assertFalse($this->_userProvider->supportsClass(Category::class));
+        $this->assertTrue($this->userProvider->supportsClass(User::class));
+        $this->assertFalse($this->userProvider->supportsClass(Category::class));
     }
-
 }
